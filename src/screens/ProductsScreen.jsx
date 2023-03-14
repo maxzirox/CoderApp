@@ -6,8 +6,8 @@ import { styles } from '../themes/appTheme'
 
 export const ProductsScreen = () => {
   return (
-    <View style={ styles.globalMargin }>
-    <Text style={ styles.globalText }>Zona de productos</Text>
+    <View>
+    <Text style={ styles.globalText }>Productos</Text>
     <CardList/>
     </View>
   )

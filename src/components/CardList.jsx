@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Button, View, Text, Image } from 'react-native'
+import { Button } from "@react-native-material/core";
+import { View, Text, Image } from 'react-native'
 import { collection, getDocs } from 'firebase/firestore'
 import dataBase from '../utils/firebase'
-import { FlatList, ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
 import { styles } from '../themes/appTheme'
 
 
@@ -42,27 +43,14 @@ export const CardList = () => {
                 style={{width: 300, height: 300}} 
                 />       
                 <Text style={ styles.globalText}>{item.titulo}</Text>
-                    <TouchableOpacity  
-                    style={{
-                        marginBottom: 30,
-                        width: 180,
-                        borderRadius: 100,
-                        alignItems: 'center',
-                        backgroundColor: '#2196F3',
-                        alignSelf: 'center'
-                    }}
-                    onPress={()=>setDetail(false)}
-                    > 
-                    <View>
-                        <Text style={ styles.globalText}>
-                            Detalles
-                        </Text>
-                    </View>
-                    </TouchableOpacity>
+                <Button  
+                        title= 'Detalles'
+                        onPress={()=>setDetail(false)}
+                        /> 
                     </View>
                     : 
                     <View>
-                        <Text style={ styles.globalText}>{item.titulo}</Text>
+                        <Text style={styles.globalText}>{item.titulo}</Text>
                         <Image 
                         source={{uri: item.imagen}}
                         style={{width: 300, height: 300}} 
@@ -73,6 +61,10 @@ export const CardList = () => {
                         <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 20}}>
                             ${item.precio}
                         </Text>
+                        <Button  
+                        title= 'Volver'
+                        onPress={()=>setDetail(true)}
+                        /> 
                     </View>}
                 </View>
             )}
