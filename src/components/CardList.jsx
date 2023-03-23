@@ -1,38 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from "@react-native-material/core";
-import { View, Text, Image } from 'react-native'
-import { collection, getDocs } from 'firebase/firestore'
-import dataBase from '../utils/firebase'
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
+import { Dimensions,View, Text, Image } from 'react-native'
 import { styles } from '../themes/appTheme'
+import Carousel from 'react-native-reanimated-carousel';
+import { useProducts } from './useProducts';
 
 
 export const CardList = () => {
-    const [products, setProducts] = useState([])
+
     const [detail, setDetail] = useState(true)
-            
-    const getProducts = async () => {
-
-        const productSnapshot = await getDocs(collection(dataBase, 'productos'))
-        const productList = productSnapshot.docs.map((item) => {
-            let product = item.data()
-            product.id = item.id
-            return product
-        })
-        return productList
-    }
-
-    useEffect( () => {
-       getProducts()
-       .then( (response) => {
-       setProducts(response)
-       setDetail(true)
-       })
-    }, [])
+    const width = Dimensions.get('window').width;
+    const products = useProducts()     
 
   return (
     <View style={{alignSelf: 'center'}}>
-        <FlatList 
+        <Carousel
+            loop
+            width={width}
+            height={width*2}
             data={products}
             renderItem={({item, index}) => (
                 <View style={{ margin: 50}}>

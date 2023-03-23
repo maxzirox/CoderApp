@@ -1,11 +1,13 @@
 import React from 'react'
-import { Text, View, Button } from 'react-native'
+import { Text, View } from 'react-native'
+import { Home } from '../components/Home'
+import { styles } from '../themes/appTheme'
 
 export const HomeScreen = ({ navigation }) => {
   return (
-    <View>
-    <Text>Bienvenido a HomeScreen</Text>
-    <Button title='ir a Productos' onPress={ () => { navigation.navigate('Products')}}/>
+    <View style={ styles.globalMargin }>
+    <Text style={ styles.globalText }>LOGO</Text>
+    <Home navigation={navigation}/>
     </View>
   )
 }
