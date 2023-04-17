@@ -25,4 +25,31 @@ export const styles = StyleSheet.create({
         color: 'aliceblue',
         alignSelf: 'center',
     },
+    avatarContainer:{
+        alignItems: 'center'
+    },
+    avatar: {
+        width: 150,
+        height: 150,
+        borderRadius: 100,
+    },
+    drawerMenu: {
+        alignItems: 'center',
+        marginVertical: 20,
+
+    },
+    textMenu: {
+        fontSize: 20,
+        color: 'aliceblue',
+        padding: 6
+    },
+    buttonMenu: {
+        alignItems: 'center',
+        textAlign: 'center',
+        backgroundColor: 'purple',
+        borderRadius: 20,
+        marginVertical: 5,
+        width: 130, 
+        height: 40
+    }
 })

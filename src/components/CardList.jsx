@@ -1,17 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from "@react-native-material/core";
 import { Dimensions,View, Text, Image } from 'react-native'
 import { styles } from '../themes/appTheme'
 import Carousel from 'react-native-reanimated-carousel';
-import { useProducts } from './useProducts';
+//import { useProducts } from '../hooks/useProducts';
+import { useSelector, useDispatch } from 'react-redux';
+import { filterProduct, selectProduct } from '../store/actions/product.action';
 
 
-export const CardList = () => {
+export const CardList = ({ navigation}) => {
 
-    const [detail, setDetail] = useState(true)
-    const width = Dimensions.get('window').width;
-    const products = useProducts()     
+    const width = Dimensions.get('window').width;   
+    const dispatch = useDispatch();
+    const products = useSelector(state => state.products.products)
+    //console.log('data desde cardlist: ', products)
+    useEffect(()=>{
+        dispatch(filterProduct(products.id))
+    },[])
 
+    const onHandleSelectedProduct = (item) =>{
+        dispatch(selectProduct(item.id));
+        console.log('producto desde handle: ',item)
+        navigation.navigate('Detalle', {name:  item.titulo})
+    }
   return (
     <View style={{alignSelf: 'center'}}>
         <Carousel
@@ -21,36 +32,17 @@ export const CardList = () => {
             data={products}
             renderItem={({item, index}) => (
                 <View style={{ margin: 50}}>
-                    {detail ? 
-                <View key={index} >
-                <Image 
-                source={{uri: item.imagen}}
-                style={{width: 300, height: 300}} 
-                />       
-                <Text style={ styles.globalText}>{item.titulo}</Text>
-                <Button  
-                        title= 'Detalles'
-                        onPress={()=>setDetail(false)}
+                    <View key={index} >
+                        <Image 
+                            source={{uri: item.imagen}}
+                            style={{width: 300, height: 300}} 
+                        />       
+                        <Text style={ styles.globalText}>{item.titulo}</Text>
+                        <Button  
+                            title= 'Detalles'
+                            onPress={ ()=>onHandleSelectedProduct(item) }
                         /> 
                     </View>
-                    : 
-                    <View>
-                        <Text style={styles.globalText}>{item.titulo}</Text>
-                        <Image 
-                        source={{uri: item.imagen}}
-                        style={{width: 300, height: 300}} 
-                        />
-                        <Text style={{ textAlign: 'center', alignSelf: 'center', fontSize: 20}}>
-                            Descripcion: {item.descripcion}
-                        </Text>
-                        <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 20}}>
-                            ${item.precio}
-                        </Text>
-                        <Button  
-                        title= 'Volver'
-                        onPress={()=>setDetail(true)}
-                        /> 
-                    </View>}
                 </View>
             )}
             

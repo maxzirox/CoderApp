@@ -20,8 +20,7 @@ export const useProducts = () => {
        getProducts()
        .then( (response) => {
        setProducts(response)
-       setDetail(true)
-       })
+       }) 
     }, [])
   return products;
 }
