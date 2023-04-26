@@ -2,20 +2,24 @@ import { Button } from '@react-native-material/core';
 import React, { useEffect } from 'react'
 import { View, Text, Image } from 'react-native'
 import { styles } from '../themes/appTheme';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from '../store/actions/cart.action';
 
 export const ProductDetail = ({ navigation }) => {
-    const product = useSelector(state => state.products.selected)
-    const params = product
+    const dispatch = useDispatch();
+    const product = useSelector(state => state.products.selected);
+    const params = product;
 
     useEffect(() => {
         navigation.setOptions({
-          title: params.titulo
+          title: product.titulo
         })
 
       }, [navigation.setOptions({
-        title: params.titulo
+        title: product.titulo
       })])
+    //disparamos la accion de agregar item y le asignamos el producto
+    const handlerAddItemCart = () => dispatch(addItem(product))
 
 
   return (
@@ -33,6 +37,10 @@ export const ProductDetail = ({ navigation }) => {
         <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 20}}>
             ${params.precio}
         </Text>
+        <Button  
+            title= 'Agregar'
+            onPress={handlerAddItemCart}
+        /> 
         <Button  
             title= 'Volver'
             onPress={ () => { navigation.navigate('Catalogo')}}

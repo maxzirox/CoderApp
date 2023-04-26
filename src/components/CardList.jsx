@@ -5,17 +5,19 @@ import { styles } from '../themes/appTheme'
 import Carousel from 'react-native-reanimated-carousel';
 //import { useProducts } from '../hooks/useProducts';
 import { useSelector, useDispatch } from 'react-redux';
-import { filterProduct, selectProduct } from '../store/actions/product.action';
+import { filterProduct, selectProduct, products } from '../store/actions/product.action';
+import { useProducts } from '../hooks/useProducts';
 
 
 export const CardList = ({ navigation}) => {
 
     const width = Dimensions.get('window').width;   
     const dispatch = useDispatch();
-    const products = useSelector(state => state.products.products)
+    const productos = useSelector(state => state.products.products)
     //console.log('data desde cardlist: ', products)
     useEffect(()=>{
-        dispatch(filterProduct(products.id))
+        //dispatch(products(productos)) 
+        dispatch(filterProduct(productos.id))
     },[])
 
     const onHandleSelectedProduct = (item) =>{
@@ -29,7 +31,7 @@ export const CardList = ({ navigation}) => {
             loop
             width={width}
             height={width*2}
-            data={products}
+            data={productos}
             renderItem={({item, index}) => (
                 <View style={{ margin: 50}}>
                     <View key={index} >
