@@ -51,5 +51,52 @@ export const styles = StyleSheet.create({
         marginVertical: 5,
         width: 130, 
         height: 40
-    }
+    },
+    cartCard: {
+        flexDirection: 'row', 
+        backgroundColor: 'purple', 
+        height: 120, 
+        borderRadius: 10, 
+        marginHorizontal: 20,
+        marginVertical: 5
+    },
+    cartTotal: {
+        flexDirection: 'row', 
+        backgroundColor: 'purple', 
+        height: 50, 
+        borderRadius: 10, 
+        marginHorizontal: 20,
+        marginVertical: 5
+    },
+    btnDetail: {
+        backgroundColor: 'purple', 
+        marginHorizontal: 70, 
+        marginVertical: 5,
+        borderRadius: 30
+    },
+    authContainer: {
+        width: '80%',
+        maxWidth: 400,
+        padding: 12,
+        margin: 12,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 10,
+        backgroundColor: 'white',
+
+    },
+    authTitle: {
+        fontSize: 24,
+        fontFamily: 'OpenSansBold',
+        marginBottom: 18,
+        textAlign: 'center',
+    },
+    promp: {
+        alignItems: 'center',
+    },
+    prompMessage: {
+        fontSize: 16,
+        fontFamily: 'OpenSansBold',
+    },
+    
 })

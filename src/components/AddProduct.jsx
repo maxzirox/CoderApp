@@ -1,13 +1,13 @@
 import { AppBar, Button, Switch, TextInput } from '@react-native-material/core'
-import { addDoc, collection } from 'firebase/firestore'
 import React, { useState } from 'react'
 import { View, Text, SafeAreaView, ScrollView, StatusBar } from 'react-native'
 import { styles } from '../themes/appTheme'
-import dataBase from '../utils/firebase'
-
+import { useDispatch } from 'react-redux'
+import { addProduct } from '../store/actions/product.action'
 
 export const AddProduct = () => {
     
+    const dispatch = useDispatch();
     const [formValue, setFormValue] = useState({
         categoria: '',
         descripcion: '',
@@ -16,19 +16,13 @@ export const AddProduct = () => {
         stock: '',
         titulo: ''
       });
-    const [succes, setSuccess] = useState('');
-    const [checked, setChecked] = useState(false);
 
-    const saveData = async (newProduct) => {
-        const productFirebase = collection(dataBase, 'productos')
-        const productDoc = await addDoc(productFirebase, newProduct)
-        setSuccess(productDoc.id)
-    }
+    const [checked, setChecked] = useState(false);
 
     const handleSubmit = () =>{
         console.log(formValue) 
         //setFormValue({...formValue})
-         saveData({...formValue})
+         dispatch(addProduct(formValue))
          alert(`El producto ${formValue.titulo} fue agregado con exito`)
 
       }

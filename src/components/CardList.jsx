@@ -5,7 +5,7 @@ import { styles } from '../themes/appTheme'
 import Carousel from 'react-native-reanimated-carousel';
 //import { useProducts } from '../hooks/useProducts';
 import { useSelector, useDispatch } from 'react-redux';
-import { filterProduct, selectProduct, products } from '../store/actions/product.action';
+import { filterProduct, selectProduct, getProduct } from '../store/actions/product.action';
 import { useProducts } from '../hooks/useProducts';
 
 
@@ -16,7 +16,7 @@ export const CardList = ({ navigation}) => {
     const productos = useSelector(state => state.products.products)
     //console.log('data desde cardlist: ', products)
     useEffect(()=>{
-        //dispatch(products(productos)) 
+        dispatch(getProduct()) 
         dispatch(filterProduct(productos.id))
     },[])
 

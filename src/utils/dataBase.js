@@ -1,0 +1,1 @@
+export const URL_API = "https://movilapp-d7497-default-rtdb.firebaseio.com/"

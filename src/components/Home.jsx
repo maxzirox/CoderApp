@@ -16,7 +16,7 @@ export const Home = ({ navigation, products}) => {
       <Pressable style={[styles.pressableHome, {backgroundColor: 'red'} ]} />
       <Pressable style={[ styles.pressableHome, {backgroundColor: 'pink'} ]} />
       <Pressable style={[ styles.pressableHome, {backgroundColor: 'blue'} ]} />
-        <View>
+        <View style={{ alignSelf: 'center'}}>
           <CardList navigation={navigation} products={products}/>
         </View>
       </View>
