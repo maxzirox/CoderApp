@@ -8,12 +8,16 @@ import { DetailScreen } from '../screens/DetailScreen';
 import { BottomNavigator } from './BottomNavigator';
 import { View, Image, TouchableOpacity, Text } from 'react-native';
 import { styles } from '../themes/appTheme';
+import { PlacesScreen } from '../screens/PlacesScreen';
+import { useSelector } from 'react-redux';
 
 
 
 const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator = () => {
+  
+  
   return (
 
     <Drawer.Navigator
@@ -21,15 +25,18 @@ export const DrawerNavigator = () => {
     >
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Productos" component={BottomNavigator} />
-        <Drawer.Screen name="Admin" component={AdminScreen} />
+        <Drawer.Screen name="Admin" component={AdminScreen} /> 
         <Drawer.Screen name="Perfil" component={UserPanel} />
         <Drawer.Screen name="Detalle" component={DetailScreen} />
+        <Drawer.Screen name="Direcciones" component={PlacesScreen} />
         {/*<Drawer.Screen name="Productos" component={BottomNavigator}/>*/}
     </Drawer.Navigator>
   );
 }
 
 const InternalMenu = ({ navigation }) => {
+  const userData = useSelector(state => state.auth.data)
+  const isAdmin = userData.map(item => item.isAdmin)
   const buttons = ['Home', 'Productos', 'Admin', 'Perfil']
   return(
     <DrawerContentScrollView>
@@ -45,15 +52,28 @@ const InternalMenu = ({ navigation }) => {
       <View style={ styles.drawerMenu}>
         {
           buttons.map((nameBtn) => {
-            return(
-              <TouchableOpacity
-                style={styles.buttonMenu}
-                key={nameBtn}
-                onPress={ () => navigation.navigate(nameBtn)} 
-              >
-                <Text style={ styles.textMenu}>{nameBtn}</Text>
-              </TouchableOpacity> 
-            )
+            if(isAdmin[0] === false && nameBtn !== 'Admin'){
+              return(
+                <TouchableOpacity
+                  style={styles.buttonMenu}
+                  key={nameBtn}
+                  onPress={ () => navigation.navigate(nameBtn)} 
+                >
+                  <Text style={ styles.textMenu}>{nameBtn}</Text>
+                </TouchableOpacity> 
+              )
+            }if(isAdmin[0] === true){
+              return(
+                <TouchableOpacity
+                  style={styles.buttonMenu}
+                  key={nameBtn}
+                  onPress={ () => navigation.navigate(nameBtn)} 
+                >
+                  <Text style={ styles.textMenu}>{nameBtn}</Text>
+                </TouchableOpacity> 
+              )
+            }
+         
           })
           
         }

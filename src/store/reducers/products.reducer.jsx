@@ -1,19 +1,22 @@
-import { createStore, combineReducers } from "redux";
-import { useProducts } from "../../hooks/useProducts";
-import { productos } from "../../utils/products";
-import { SELECT_PRODUCT, FILTER_PRODUCT, LIST_PRODUCTS } from "../actions/product.action";
+
+import { SELECT_PRODUCT, FILTER_PRODUCT, GET_PRODUCTS, ADD_PRODUCT } from "../actions/product.action";
 
 
 
 
 const initialState = {
-    products: productos,
+    products: [],
     filteredProducts: [],
     selected: null,
 }
 
 const ProductReducer = (state = initialState, action) => {
     switch(action.type){
+        case GET_PRODUCTS:
+            return {
+                ...state,
+                products: action.payload,
+            }
         case SELECT_PRODUCT:
             const indexProduct = state.products.findIndex((product) => product.id === action.productId)
             if(indexProduct === -1) return state;
@@ -22,6 +25,10 @@ const ProductReducer = (state = initialState, action) => {
         case FILTER_PRODUCT:
             return{ ...state, filteredProducts: state.products.filter(product => product.id === action.productId)}
         
+        case ADD_PRODUCT:
+            const newState = []
+            return newState
+            
         default:
             return state;
     }

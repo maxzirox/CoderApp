@@ -19,5 +19,7 @@ const app = initializeApp(firebaseConfig);
 
 const dataBase = getFirestore(app)
 
+export const URL_AUTH_SINGUP ='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBiNy4n3vAikf2oDkSq7xniqMyngdnIlb8'
 
+export const URL_AUTH_SINGIN = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBiNy4n3vAikf2oDkSq7xniqMyngdnIlb8'
 export default dataBase
