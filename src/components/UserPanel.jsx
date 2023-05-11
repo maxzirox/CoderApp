@@ -12,10 +12,10 @@ export const UserPanel = ({navigation}) => {
   const userID = useSelector(state => state.auth.userId)
   const [user, setUser] = useState([]);
   const userData = useSelector( state => state.auth.data)
-
+  const image = userData.map(item => item.imagen)
   return (
     <View style={ styles.globalMargin }>
-        <Avatar style={{ alignSelf: 'center', marginVertical: 10}} image={{ uri: "https://mui.com/static/images/avatar/1.jpg" }} />
+        <Avatar style={{ alignSelf: 'center', marginVertical: 10}} source={{ uri: image.uri }} />
         <Text style={{ alignSelf: 'center', marginVertical: 10 }}>{userData.map(item => item.email)}</Text>
         <ImagesPicker/>
         <ListItem title="Informacion Personal" />

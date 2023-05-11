@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import dataBase, { URL_AUTH_SINGIN, URL_AUTH_SINGUP } from "../../utils/firebase";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 
@@ -73,12 +73,28 @@ export const signin = (email, password) =>{
 
 }
 
-export const getImage = (image, id) =>{
+export const getImage = (image, id, name) =>{
     return async dispatch => {
             const userDocRef = doc(dataBase, 'usuarios', id)
             try{
+                const URL = ''
+                const storage = getStorage();
+                const storageRef = ref(storage, name);
+                const metadata = {
+                    contentType: 'image/jpeg',
+                  };
+                // 'file' comes from the Blob or File API
+                uploadBytes(storageRef, image, metadata).then((snapshot) => {
+                console.log('Uploaded a blob or file!');
+                console.log('snapshot: ',snapshot)
+                //URL = snapshot.getDownloadURL()
+                });
+
+                console.log('image desde action: ', image)
+                console.log('id desde action: ', id)
+                console.log('URL desde auth: ',URL)
               //con arayUnion agregamos un nuevo elemento a las direcciones
-              await updateDoc(userDocRef, {imagen: image.uri})
+              await updateDoc(userDocRef, {imagen: image})
               .then(alert('imagen cambiada'))
               dispatch({
                 type: GET_IMAGE,
