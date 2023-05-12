@@ -1,6 +1,6 @@
 import { addDoc, collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import dataBase, { URL_AUTH_SINGIN, URL_AUTH_SINGUP } from "../../utils/firebase";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 export const SIGNUP = 'SIGN_UP';
 export const SIGNIN = 'SIGN_IN';
@@ -76,26 +76,35 @@ export const signin = (email, password) =>{
 export const getImage = (image, id, name) =>{
     return async dispatch => {
             const userDocRef = doc(dataBase, 'usuarios', id)
+            const blobImage = await new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = () =>{
+                    resolve(xhr.response);
+                };
+                xhr.onerror = () => {
+                    reject(new TypeError('Network request failed'));
+                };
+                xhr.responseType = 'blob';
+                xhr.open("GET", image, true);
+                xhr.send(null);
+            })
             try{
-                const URL = ''
+                let URL = '';
                 const storage = getStorage();
-                const storageRef = ref(storage, name);
+                const storageRef = ref(storage, `avatar/${name}`);
                 const metadata = {
                     contentType: 'image/jpeg',
                   };
                 // 'file' comes from the Blob or File API
-                uploadBytes(storageRef, image, metadata).then((snapshot) => {
+                uploadBytes(storageRef, blobImage, metadata).then((snapshot) => {
                 console.log('Uploaded a blob or file!');
-                console.log('snapshot: ',snapshot)
-                //URL = snapshot.getDownloadURL()
                 });
+                URL = await getDownloadURL(storageRef).then((downloadURL) => downloadURL);
+                console.log('image desde action: ', URL)
 
-                console.log('image desde action: ', image)
-                console.log('id desde action: ', id)
-                console.log('URL desde auth: ',URL)
-              //con arayUnion agregamos un nuevo elemento a las direcciones
-              await updateDoc(userDocRef, {imagen: image})
+              await updateDoc(userDocRef, {imagen: URL})
               .then(alert('imagen cambiada'))
+              
               dispatch({
                 type: GET_IMAGE,
                 url: image,

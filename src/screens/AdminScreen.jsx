@@ -7,9 +7,10 @@ import { useSelector } from 'react-redux'
 export const AdminScreen = () => {
   const userData = useSelector(state => state.auth.data);
 
+  const image = userData.map(item => item.imagen)
   return (
     <View>
-    <Avatar style={{ alignSelf: 'center', marginVertical: 10}} image={{ uri: "https://mui.com/static/images/avatar/1.jpg" }} />
+    <Avatar style={{ alignSelf: 'center', marginVertical: 10}} image={{ uri: `${image}` }} />
     <Text style={{ alignSelf: 'center', marginVertical: 10 }}>{userData.map(user => user.name)}</Text>
     <AdminPanel/>
     </View>

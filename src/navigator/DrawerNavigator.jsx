@@ -10,6 +10,7 @@ import { View, Image, TouchableOpacity, Text } from 'react-native';
 import { styles } from '../themes/appTheme';
 import { PlacesScreen } from '../screens/PlacesScreen';
 import { useSelector } from 'react-redux';
+import { UserInfoScreen } from '../screens/UserInfoScreen';
 
 
 
@@ -17,7 +18,7 @@ const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator = () => {
   
-  
+
   return (
 
     <Drawer.Navigator
@@ -29,6 +30,7 @@ export const DrawerNavigator = () => {
         <Drawer.Screen name="Perfil" component={UserPanel} />
         <Drawer.Screen name="Detalle" component={DetailScreen} />
         <Drawer.Screen name="Direcciones" component={PlacesScreen} />
+        <Drawer.Screen name="Informacion" component={UserInfoScreen} />
         {/*<Drawer.Screen name="Productos" component={BottomNavigator}/>*/}
     </Drawer.Navigator>
   );
@@ -38,12 +40,14 @@ const InternalMenu = ({ navigation }) => {
   const userData = useSelector(state => state.auth.data)
   const isAdmin = userData.map(item => item.isAdmin)
   const buttons = ['Home', 'Productos', 'Admin', 'Perfil']
+
+  const image = userData.map(item => item.imagen)
   return(
     <DrawerContentScrollView>
       <View style={styles.avatarContainer }>
         <Image 
           source={{
-            uri: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
+            uri: `${image}`
           }}
           style={ styles.avatar }
         />

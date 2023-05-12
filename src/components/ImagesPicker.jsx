@@ -15,33 +15,30 @@ export const ImagesPicker = () => {
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
+    
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [3, 3],
       quality: 1,
-      base64: true,
+      base64: false,
     })
-    //console.log(result);
     if (!result.canceled) {
-      //const data = new FormData();
+      let resultAssets = result.assets
       let uriParts = result.assets[0].uri.split('.')
       let fileType = uriParts[uriParts.length - 1]
       let date = new Date();
-      //data.append('images', {
-      //  name: `photo.${fileType}`,
-      //  type: `image/${fileType}`,
-      //  uri: result.assets[0].uri
-      //})
+      console.log('assets desde imagesPicker: ', resultAssets)
+
       setImage({
         name: `photo${date}.${fileType}`,
         type: `image/${fileType}`,
         uri: result.assets[0].uri
       });
-      console.log('uriparts: ', uriParts)
-      console.log('filetype: ', fileType)
-      console.log('data desde imagepicker: ', image)
-      console.log('userID: ', userID)
+      //console.log('uriparts: ', uriParts)
+      //console.log('filetype: ', fileType)
+      //console.log('data desde imagepicker: ', image)
+      //console.log('userID: ', userID)
     }
   };
 
@@ -50,8 +47,8 @@ export const ImagesPicker = () => {
       <Button type='outlined' style={styles.buttonMenu}title="Cambiar Imagen" onPress={pickImage} />
       {image &&
       <View>
-      <Image source={{ uri: image.uri }} style={{ width: 200, height: 200 }} />
-      <Text>{image.name}</Text>
+      <Image source={{ uri: image.uri }} style={{ width: 100, height: 100, borderRadius: 30, alignSelf: 'center' }} />
+      <Text style={{fontSize: 10, color: 'red', alignSelf: 'center'}}>{image.name}</Text>
       <Button style={styles.buttonMenu}title="Guardar" onPress={()=>{ dispatch(getImage(image.uri, userID[0], image.name))}} />
       </View> }
     </View>
