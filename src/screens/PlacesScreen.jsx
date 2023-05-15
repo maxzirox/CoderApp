@@ -3,15 +3,15 @@ import { View, Text, ScrollView, StyleSheet, FlatList } from 'react-native';
 import { styles } from "../themes/appTheme";
 import { Button, TextInput } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
-import { addPlace } from "../store/actions/places.action";
 import { useState } from "react";
 import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
 import dataBase from "../utils/firebase";
 import { ListItem } from "@react-native-material/core";
+import { addPlace } from "../store/actions/user.action";
 
 export const PlacesScreen = () => {
     const dispatch = useDispatch();
-    const userData = useSelector( state => state.auth.data)
+    const userData = useSelector( state => state.user.data)
     const userID = useSelector( state => state.auth.userId)
     const [address, setAddress] = useState('')
     const [user, setUser] = useState('')
