@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
     globalMargin: {
-        marginHorizontal: 20
+        marginHorizontal: 20,
+
     },
     globalText: {
         textAlign: 'center',
@@ -18,10 +19,11 @@ export const styles = StyleSheet.create({
         shadowColor: '#171717',  
         shadowOpacity: 0.9,  
         shadowRadius: 5, 
-        borderColor: '#ccc'
+        borderColor: '#ccc',
+
     } ,
     pressableText: {
-        fontSize: 30,
+        fontSize: 25,
         color: 'aliceblue',
         alignSelf: 'center',
     },
@@ -107,6 +109,14 @@ export const styles = StyleSheet.create({
     formInput: {
         marginVertical: 5,
         width: 220
+    },
+    cartOrders: {
+        flexDirection: 'column', 
+        backgroundColor: 'purple', 
+        height: 120, 
+        borderRadius: 10, 
+        marginHorizontal: 20,
+        marginVertical: 5
     },
     
 })

@@ -12,11 +12,13 @@ import { addPlace } from "../store/actions/user.action";
 export const PlacesScreen = () => {
     const dispatch = useDispatch();
     const userData = useSelector( state => state.user.data)
-    const userID = useSelector( state => state.auth.userId)
+    const userID = useSelector( state => state.user.userId)
+    const authId = useSelector(state => state.auth.userId)
     const [address, setAddress] = useState('')
     const [user, setUser] = useState('')
     const onHandlerPress = () =>{
-        dispatch(addPlace(address, userID))
+        //console.log('userId desde placesScreen: ',userID)
+        dispatch(addPlace(address, userID, authId))
     }
 
     return(

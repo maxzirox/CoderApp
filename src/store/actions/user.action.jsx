@@ -8,15 +8,15 @@ export const ADD_PLACE = 'ADD_PLACE';
 export const EDIT_INFO = 'EDIT_INFO';
 export const GET_ORDERS = 'GET_ORDERS';
 
-export const addPlace = ( newAddress, id, userId ) => {
+export const addPlace = ( newAddress, userId, authId ) => {
     return async dispatch => {
         
-            const userDocRef = doc(dataBase, 'usuarios', id)
+            const userDocRef = doc(dataBase, 'usuarios', userId)
             try{
               //con arayUnion agregamos un nuevo elemento a las direcciones
               await updateDoc(userDocRef, { address: arrayUnion(newAddress)})
               .then(alert(`Nueva direccion registrada con exito`))
-              const userQuery = query(collection(dataBase, 'usuarios'), where('userId', '==', userId))
+              const userQuery = query(collection(dataBase, 'usuarios'), where('userId', '==', authId))
               const querySnapshot = await getDocs(userQuery)
               const userData = querySnapshot.docs.map(item => item.data());
               dispatch({
@@ -111,7 +111,7 @@ export const editInfo = ( nombre, email, phone, logId, userId) => {
       const querySnapshot = await getDocs(userQuery)
       const userData = querySnapshot.docs.map(item => item.data());
       dispatch({
-        type: ADD_PLACE,
+        type: EDIT_INFO,
         data: userData,
         confirm: true,
       })
@@ -127,6 +127,7 @@ export const getOrders = (userId) => {
       const orderQuery = query(collection(dataBase, 'ordenes'), where('idCliente', '==', userId))
       const querySnapshot = await getDocs(orderQuery)
       const ordersData = querySnapshot.docs.map(item => item.data())
+      console.log('orders desde action: ', ordersData)
       dispatch({
         type: GET_ORDERS,
         orders: ordersData,

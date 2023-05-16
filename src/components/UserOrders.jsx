@@ -9,34 +9,40 @@ import { getOrders } from '../store/actions/user.action';
 export const UserOrders = () => {
 
     const userOrders = useSelector(state => state.user.orders)
-    
 
-
-    console.log('ordenes desde userOrder: ', userOrders.map(item => item))
-    const CardCart = ({item}) => {
-        return(
-        <View style={styles.cartCard}>
-          <View style={{flexDirection: 'column', alignSelf: 'center', marginHorizontal: 10}}>
-            <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 15, color: 'aliceblue'}}>
-              {item.Cliente}
-            </Text>
-            <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 15, marginHorizontal: 10, color: 'aliceblue'}}>
-              $ {item.Productos}
+    console.log('ordenes desde userOrder: ', userOrders)
+    const CardOrder = ({item}) => {
+      return(
+        <View style={styles.cartOrders}>
+          <View>
+            <Text style={{textAlign: 'center', fontSize: 20, color: 'aliceblue'}}>
+              {item.Cliente.name}
             </Text>
           </View>
+          <View style={{flexDirection: 'column', alignSelf: 'center', marginHorizontal: 10}}>
+            <Text style={{textAlign: 'center', fontSize: 20, color: 'aliceblue'}}>
+              productos:
+            </Text>
+               {item.Productos.map(product => {
+                return(
+                  <Text key={product.id} style={{textAlign: 'center', alignSelf: 'center', fontSize: 15, marginHorizontal: 10, color: 'aliceblue'}}>
+                    {product.titulo}
+                  </Text>
+                )
+              })}
+          </View>
           <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 15, marginHorizontal: 10, color: 'aliceblue'}}>
-            x {item.Total}
+            Total: {item.Total}
           </Text>
-
-
         </View>
-      )}
+      )
+    }
       return (
         <View>
           <FlatList
             data={userOrders}
             renderItem={({item}) => ( 
-              <CardCart item={item}/> 
+              <CardOrder item={item}/> 
               )}
             keyExtractor={item => item}
           />

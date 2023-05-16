@@ -22,6 +22,7 @@ export const UserInfo = () => {
     const image = userData.map(item => item.imagen)
     const userName = userData.map(item => item.name)
     const userEmail = userData.map(item => item.email)
+    const userPhone = userData.map(item => item.phone)
     const handleSubmit = () =>{
           console.log(logId) 
         //setFormValue({...formValue})
@@ -38,7 +39,7 @@ export const UserInfo = () => {
         setFormValue({
             name: '',
             email: '',
-            //imagen: '',
+            phone: '',
           })
     }
   return (
@@ -49,7 +50,7 @@ export const UserInfo = () => {
             <Text style={{ alignSelf: 'center', marginVertical: 20, fontSize: 20, color: 'aliceblue' }}>Editar informacion personal</Text>
             <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, name: value})}  placeholder={`${userName}`} style={{ margin: 16 }} />
             <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, email: value})} placeholder={`${userEmail}`} style={{ margin: 16 }} />
-            <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, phone: value})} placeholder="Phone" style={{ margin: 16 }} />
+            <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, phone: value})} placeholder={`${userPhone}`} style={{ margin: 16 }} />
 
             <Button
                 style={styles.btnDetail}
