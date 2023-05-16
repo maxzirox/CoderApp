@@ -8,17 +8,17 @@ import { ScrollView } from 'react-native-gesture-handler'
 export const Home = ({ navigation, products}) => {
 
   return (
-    <ScrollView style={{flex: 1, paddingBottom: 930}}>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-      <Pressable onPress={ () => { navigation.navigate('Productos')}} style={ [styles.pressableHome, {backgroundColor: 'skyblue'}] }>
-          <Text style={ styles.pressableText }>Productos</Text>
-      </Pressable>
-      <Pressable style={[styles.pressableHome, {backgroundColor: 'red'} ]} />
-      <Pressable style={[ styles.pressableHome, {backgroundColor: 'pink'} ]} />
-      <Pressable style={[ styles.pressableHome, {backgroundColor: 'blue'} ]} />
-        <View style={{ alignSelf: 'center'}}>
+    <ScrollView>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignSelf: 'center' }}>
+        <Pressable onPress={ () => { navigation.navigate('Productos')}} style={ [styles.pressableHome, {backgroundColor: '#522b5b'}] }>
+            <Text style={ styles.pressableText }>Productos</Text>
+        </Pressable>
+        <Pressable style={[styles.pressableHome, {backgroundColor: '#854f6c'} ]} />
+        <Pressable style={[ styles.pressableHome, {backgroundColor: '#dfb6b2'} ]} />
+        <Pressable style={[ styles.pressableHome, {backgroundColor: '#fbe4d8'} ]} />
+      </View>
+      <View style={{ alignSelf: 'center'}}>
           <CardList navigation={navigation} products={products}/>
-        </View>
       </View>
     </ScrollView>
 

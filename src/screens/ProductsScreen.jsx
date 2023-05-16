@@ -10,7 +10,7 @@ export const ProductsScreen = ({navigation}) => {
   //const products = useSelector(state => state.products.products)
   //console.log("productos desde producScreen: ", products)
   return (
-    <View>
+    <View style={ styles.globalMargin }>
     <Text style={ styles.globalText }>Productos</Text>
     <CardList navigation={navigation} /> 
     </View>

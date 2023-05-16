@@ -24,7 +24,7 @@ export const ProductDetail = ({ navigation }) => {
 
 
   return (
-    <ScrollView style={{flex: 1}}>
+    <ScrollView style={[styles.globalMargin, {flex: 1}]}>
       <View style={{paddingVertical: 40}}>
         <Text style={styles.globalText}>{product.titulo}</Text>
             <Image 
