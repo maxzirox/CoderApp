@@ -16,11 +16,20 @@ export const removeItem = itemId => ({
     itemId
 });
 
-export const confirmCart = (payload, total) => {
+export const confirmCart = (payload, total, userInfo) => {
     return async dispatch => {
         try{
             const orderFirebase = collection(dataBase, 'ordenes')
-            const orderDoc = await addDoc(orderFirebase,{ items: payload, total})
+            const orderDoc = await addDoc(orderFirebase,{ 
+                idCliente: userInfo[0].userId,
+                Cliente: {
+                name: userInfo[0].name,
+                address: userInfo[0].address,
+                Phone: userInfo[0].phone
+                }, 
+                Productos: payload, 
+                Total: total
+            })
             console.log(orderDoc.id)
         dispatch({
             type: CONFIRM_CART,

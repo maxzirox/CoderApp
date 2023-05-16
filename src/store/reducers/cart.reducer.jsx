@@ -5,6 +5,7 @@ import { ADD_ITEM, CONFIRM_CART, REMOVE_ITEM } from "../actions/cart.action";
 //inicializamos el estado asignandole un objeto con un array de items vacio y un total en 0
 const INITIAL_STATE = {
     items: [],
+    user: [],
     total: 0,
 }
 // le pasamo una lista de prod a sumTotal para luego obtener un nuevo array con map que nos traera el precio total
