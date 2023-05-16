@@ -19,7 +19,7 @@ export const UserPanel = ({navigation}) => {
     <View style={ styles.globalMargin }>
         <ImagesPicker/>
         <ListItem title="Informacion Personal" onPress={() => navigation.navigate('Informacion')} />
-        <ListItem title="Historial de pedidos" />
+        <ListItem title="Historial de pedidos" onPress={() => navigation.navigate('Ordenes')}/>
         <ListItem title="Mis Direcciones" onPress={() => navigation.navigate('Direcciones')}/>
         <ListItem title='Cambiar contraseña' />
         

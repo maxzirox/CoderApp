@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
         fontSize: 40
     },
     pressableHome: {
-        width: 150,
-        height: 150,
+        width: 140,
+        height: 140,
         margin: 10,
         borderRadius: 10,
         shadowOffset: {width: -2, height: 4},  

@@ -5,7 +5,8 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 export const GETINFO = 'GET_INFO';
 export const GET_IMAGE = 'GET_IMAGE';
 export const ADD_PLACE = 'ADD_PLACE';
-export const EDIT_INFO = 'EDIT_INFO'
+export const EDIT_INFO = 'EDIT_INFO';
+export const GET_ORDERS = 'GET_ORDERS';
 
 export const addPlace = ( newAddress, id, userId ) => {
     return async dispatch => {
@@ -117,5 +118,23 @@ export const editInfo = ( nombre, email, phone, logId, userId) => {
     } catch (err) {
       alert(err)
     }    
+  }
+}
+
+export const getOrders = (userId) => {
+  return async dispatch => {
+    try{
+      const orderQuery = query(collection(dataBase, 'ordenes'), where('idCliente', '==', userId))
+      const querySnapshot = await getDocs(orderQuery)
+      const ordersData = querySnapshot.docs.map(item => item.data())
+      dispatch({
+        type: GET_ORDERS,
+        orders: ordersData,
+      })
+    }
+    catch (err) {
+      alert(err)
+    }  
+
   }
 }

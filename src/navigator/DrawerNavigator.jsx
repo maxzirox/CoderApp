@@ -12,7 +12,8 @@ import { PlacesScreen } from '../screens/PlacesScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserInfoScreen } from '../screens/UserInfoScreen';
 import { useEffect } from 'react';
-import { getInfo } from '../store/actions/user.action';
+import { getInfo, getOrders } from '../store/actions/user.action';
+import { OrdersScreen } from '../screens/OrdersScreen';
 
 
 
@@ -33,6 +34,8 @@ export const DrawerNavigator = () => {
         <Drawer.Screen name="Detalle" component={DetailScreen} />
         <Drawer.Screen name="Direcciones" component={PlacesScreen} />
         <Drawer.Screen name="Informacion" component={UserInfoScreen} />
+        <Drawer.Screen name="Ordenes" component={OrdersScreen} />
+
         {/*<Drawer.Screen name="Productos" component={BottomNavigator}/>*/}
     </Drawer.Navigator>
   );
@@ -49,6 +52,7 @@ const InternalMenu = ({ navigation }) => {
 
   useEffect(()=>{
     dispatch(getInfo(userId))
+    dispatch(getOrders(userId))
   }, [])
   return(
     <DrawerContentScrollView>

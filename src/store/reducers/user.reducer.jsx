@@ -1,9 +1,10 @@
 
 import { Place } from '../../models/Place'
-import { ADD_PLACE, GETINFO, GET_IMAGE } from '../actions/user.action'
+import { ADD_PLACE, GETINFO, GET_IMAGE, GET_ORDERS } from '../actions/user.action'
 
 const initialState = {
     data: [],
+    orders: [],
     userId: null,
 }
 
@@ -26,6 +27,11 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 data: action.data,
                 userId: action.userId
+            }
+        case GET_ORDERS:
+            return{
+                ...state,
+                orders: action.orders
             }
         default:
             return state
