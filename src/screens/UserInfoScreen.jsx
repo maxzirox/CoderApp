@@ -4,7 +4,7 @@ import { UserInfo } from '../components/UserInfo'
 
 export const UserInfoScreen = () => {
   return (
-    <View style={{marginHorizontal: 20, marginVertical: 20}}>
+    <View style={{backgroundColor: '#190019', height: '100%'}}>
         <UserInfo/>
     </View>
   )

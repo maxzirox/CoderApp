@@ -43,10 +43,10 @@ export const UserInfo = () => {
           })
     }
   return (
-    <ScrollView style={{flex: 1, paddingBottom: 530}}>
-        <Image source={{ uri: `${image}` }} style={{ width: 100, height: 100, borderRadius: 30, alignSelf: 'center' }} />
-        <Text style={{ alignSelf: 'center', marginVertical: 10 }}>{userData.map(item => item.email)}</Text>
-        <View style={{backgroundColor: 'purple'}}>
+    <ScrollView style={{flex: 1, paddingBottom: 530, marginHorizontal: 20}}>
+        <Image source={{ uri: `${image}` }} style={{ width: 100,marginVertical: 10, height: 100, borderRadius: 30, alignSelf: 'center' }} />
+        <Text style={{ alignSelf: 'center', marginVertical: 10, color: 'aliceblue' }}>{userData.map(item => item.email)}</Text>
+        <View style={{backgroundColor: '#2B124C'}}>
             <Text style={{ alignSelf: 'center', marginVertical: 20, fontSize: 20, color: 'aliceblue' }}>Editar informacion personal</Text>
             <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, name: value})}  placeholder={`${userName}`} style={{ margin: 16 }} />
             <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, email: value})} placeholder={`${userEmail}`} style={{ margin: 16 }} />

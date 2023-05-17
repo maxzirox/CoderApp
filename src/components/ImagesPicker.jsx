@@ -67,10 +67,10 @@ export const ImagesPicker = () => {
   return (
     <View>
       {!image ?
-      <View>
+      <View style={{marginTop: 20}}>
         <Image source={{ uri: `${userImage}` }} style={{ width: 100, height: 100, borderRadius: 30, alignSelf: 'center' }} />
         <ModalCamera pickImageCamera={pickImageCamera} pickImageGalery={pickImageGalery}/>
-        <Text style={{ alignSelf: 'center', marginVertical: 10, fontSize: 20}}>{userData.map(item => item.email)}</Text>
+        <Text style={{ alignSelf: 'center', marginVertical: 10, fontSize: 20, color: 'aliceblue'}}>{userData.map(item => item.email)}</Text>
         
       </View>  
       :

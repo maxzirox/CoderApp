@@ -6,14 +6,18 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const productsIcon = <MaterialCommunityIcons name="store" size={30} color="black" />;
-const cartIcon = <MaterialCommunityIcons name="cart" size={30} color="black" />;
+const productsIcon = <MaterialCommunityIcons name="store" size={30} color="#FBE4D8" />;
+const cartIcon = <MaterialCommunityIcons name="cart" size={30} color="#FBE4D8" />;
 
 const Tab = createMaterialBottomTabNavigator();
 
 export function BottomNavigator() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator 
+      activeColor="aliceblue"
+      inactiveColor="#3e2465"
+      barStyle={{ backgroundColor: '#2B124C' }}
+    >
       <Tab.Screen 
         name="Catalogo" 
         component={ProductsScreen} 
@@ -21,6 +25,7 @@ export function BottomNavigator() {
           tabBarIcon: () => (
             productsIcon
             ),
+          
         }}
       />
       <Tab.Screen 

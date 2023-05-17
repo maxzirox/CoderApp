@@ -9,7 +9,7 @@ export const Home = ({ navigation, products}) => {
 
   return (
     <ScrollView>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignSelf: 'center' }}>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center' }}>
         <Pressable onPress={ () => { navigation.navigate('Productos')}} style={ [styles.pressableHome, {backgroundColor: '#522b5b'}] }>
             <Text style={ styles.pressableText }>Productos</Text>
         </Pressable>
@@ -17,7 +17,7 @@ export const Home = ({ navigation, products}) => {
         <Pressable style={[ styles.pressableHome, {backgroundColor: '#dfb6b2'} ]} />
         <Pressable style={[ styles.pressableHome, {backgroundColor: '#fbe4d8'} ]} />
       </View>
-      <View style={{ alignSelf: 'center'}}>
+      <View style={{ justifyContent: 'center'}}>
           <CardList navigation={navigation} products={products}/>
       </View>
     </ScrollView>

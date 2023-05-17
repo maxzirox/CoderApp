@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, ScrollView, StyleSheet, FlatList } from 'react-native';
 import { styles } from "../themes/appTheme";
-import { Button, TextInput } from "react-native-paper";
+import { Button, Divider, List, TextInput } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
@@ -22,25 +22,40 @@ export const PlacesScreen = () => {
     }
 
     return(
-        <ScrollView>
-            <View style={{flex: 1, margin: 30, alignSelf: 'center',}}>
-                <Text style={{ fontSize: 18, marginBottom: 16}}>Agregar direccion</Text>
+        
+        <View style={styles.globalMargin}>
+            <View style={{alignSelf: 'center'}}>
+                <Text style={{ marginTop: 30, fontSize: 25, marginBottom: 16, color: 'aliceblue', textAlign: 'center'}}>Agregar direccion</Text>
                 <TextInput 
-                style={styles.formInput}  
-                label='Nueva direccion'
-                autoCapitalize="none"
-                onChangeText={(value) => setAddress(value)}
-                value={address}
+                    style={{marginVertical: 20, width: 300}}  
+                    label='Nueva direccion'
+                    autoCapitalize="none"
+                    onChangeText={(value) => setAddress(value)}
+                    value={address}
                 />
-                <Button style={styles.buttonMenu} onPress={()=>{onHandlerPress()}}>
-                    <Text>Guardar</Text>
+                <Button icon="plus" style={[styles.buttonMenu, {alignSelf: 'center', marginBottom: 20}]} onPress={()=>{onHandlerPress()}}>
+                    <Text style={{color: 'aliceblue'}}>Agregar</Text>
                 </Button>
+            </View>
 
+            <ScrollView>
                 {userData.map(item => item.address.map((address) =>{
                     return(
-                    <ListItem title={address} key={address}/>
+                        <View>
+                            <List.Item
+                            title={address}
+                            key={address}
+                            description="Direccion"
+                            left={props => <List.Icon {...props} icon="home" color='aliceblue' />}
+                            titleStyle={{color: 'aliceblue', fontSize: 20}}
+                            descriptionStyle={{color: '#FBE4D8', fontSize: 11}}
+                            style={{backgroundColor: '#2B124C'}}
+                            />
+                            <Divider/>
+                        </View>
                 )}) )}
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
+       
     )
 }

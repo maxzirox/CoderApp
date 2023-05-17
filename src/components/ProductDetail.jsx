@@ -31,10 +31,13 @@ export const ProductDetail = ({ navigation }) => {
                 source={{uri: product.imagen}}
                 style={{width: 300, height: 300, alignSelf: 'center'}} 
             />
-        <Text style={{ textAlign: 'center', alignSelf: 'center', fontSize: 20}}>
-            Descripcion: {product.descripcion}
+        <Text style={{ textAlign: 'center', fontSize: 40, color: 'aliceblue'}}>
+            Descripcion
         </Text>
-        <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 20}}>
+        <Text style={{ textAlign: 'center', fontSize: 20, color: 'aliceblue'}}>
+        {product.descripcion}
+        </Text>
+        <Text style={{textAlign: 'center', fontSize: 40, color: 'aliceblue', marginVertical: 20}}>
             ${product.precio}
         </Text>
         <TouchableOpacity 

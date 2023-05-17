@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native'
 export const styles = StyleSheet.create({
     globalMargin: {
         //marginHorizontal: 20,
-        backgroundColor: '#190019'
+        backgroundColor: '#190019',
+        height: '100%'
 
     },
     globalText: {
@@ -58,7 +59,7 @@ export const styles = StyleSheet.create({
     },
     cartCard: {
         flexDirection: 'row', 
-        backgroundColor: 'purple', 
+        backgroundColor: '#2B124C', 
         height: 120, 
         borderRadius: 10, 
         marginHorizontal: 20,
@@ -66,7 +67,7 @@ export const styles = StyleSheet.create({
     },
     cartTotal: {
         flexDirection: 'row', 
-        backgroundColor: 'purple', 
+        backgroundColor: '#2B124C', 
         height: 50, 
         borderRadius: 10, 
         marginHorizontal: 20,
@@ -114,7 +115,7 @@ export const styles = StyleSheet.create({
     },
     cartOrders: {
         flexDirection: 'column', 
-        backgroundColor: 'purple', 
+        backgroundColor: '#2B124C', 
         height: 120, 
         borderRadius: 10, 
         marginHorizontal: 20,

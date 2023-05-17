@@ -26,7 +26,7 @@ export const CardList = ({ navigation}) => {
         navigation.navigate('Detalle', {name:  item.titulo})
     }
   return (
-    <View style={{alignSelf: 'center'}}>
+    <View style={{alignSelf: 'center', justifyContent: 'center'}}>
         <Carousel
             loop
             width={width}

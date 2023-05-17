@@ -9,6 +9,8 @@ export const AuthScreen = ({navigation}) => {
 
 
   return (
-    <SignIn navigation={navigation}/>
+    <View style={[styles.globalMargin, {height:'100%'}]}>
+      <SignIn navigation={navigation}/>
+    </View>
   )
 }

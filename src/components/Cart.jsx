@@ -57,10 +57,10 @@ export const Cart = () => {
         keyExtractor={item => item.id}
       />
       <View style={styles.cartTotal}>
-          <Text> productos: {items.length}</Text>
-          <Text> Total: {total}</Text>
+          <Text style={{color: 'aliceblue'}}> productos: {items.length}</Text>
+          <Text style={{color: 'aliceblue'}}> Total: {total}</Text>
           <TouchableOpacity>
-            <Text onPress={()=>handlerConfirmCart()} >Continuar</Text>
+            <Text style={{color: 'aliceblue'}} onPress={()=>handlerConfirmCart()} >Continuar</Text>
           </TouchableOpacity>
       </View>
     </View>

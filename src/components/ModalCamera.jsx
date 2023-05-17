@@ -25,7 +25,7 @@ export const ModalCamera = ({pickImageCamera, pickImageGalery}) => {
             <Button icon="camera" mode="text" onPress={pickImageCamera}>
               Abrir camara
             </Button>
-            <Button icon="windows" mode="text" onPress={pickImageGalery}>
+            <Button icon="folder" mode="text" onPress={pickImageGalery}>
                 Abrir Galeria
             </Button>
           </View>

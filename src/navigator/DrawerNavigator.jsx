@@ -14,6 +14,7 @@ import { UserInfoScreen } from '../screens/UserInfoScreen';
 import { useEffect } from 'react';
 import { getInfo, getOrders } from '../store/actions/user.action';
 import { OrdersScreen } from '../screens/OrdersScreen';
+import { UserScreen } from '../screens/UserScreen';
 
 
 
@@ -27,14 +28,14 @@ export const DrawerNavigator = () => {
     <Drawer.Navigator
     drawerContent={(props) => <InternalMenu {...props} />}
     >
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Productos" component={BottomNavigator} />
-        <Drawer.Screen name="Admin" component={AdminScreen} /> 
-        <Drawer.Screen name="Perfil" component={UserPanel} />
-        <Drawer.Screen name="Detalle" component={DetailScreen} />
-        <Drawer.Screen name="Direcciones" component={PlacesScreen} />
-        <Drawer.Screen name="Informacion" component={UserInfoScreen} />
-        <Drawer.Screen name="Ordenes" component={OrdersScreen} />
+        <Drawer.Screen name="Home"  options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }} component={HomeScreen} />
+        <Drawer.Screen name="Productos" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }} component={BottomNavigator} />
+        <Drawer.Screen name="Admin" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={AdminScreen} /> 
+        <Drawer.Screen name="Perfil" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={UserScreen} />
+        <Drawer.Screen name="Detalle" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={DetailScreen} />
+        <Drawer.Screen name="Direcciones" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={PlacesScreen} />
+        <Drawer.Screen name="Informacion" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={UserInfoScreen} />
+        <Drawer.Screen name="Ordenes" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={OrdersScreen} />
 
         {/*<Drawer.Screen name="Productos" component={BottomNavigator}/>*/}
     </Drawer.Navigator>
@@ -55,7 +56,7 @@ const InternalMenu = ({ navigation }) => {
     dispatch(getOrders(userId))
   }, [])
   return(
-    <DrawerContentScrollView>
+    <DrawerContentScrollView style={styles.globalMargin}>
       <View style={styles.avatarContainer }>
         <Image 
           source={{

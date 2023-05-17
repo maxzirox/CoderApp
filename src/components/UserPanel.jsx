@@ -1,4 +1,4 @@
-import { Avatar, ListItem } from '@react-native-material/core'
+import { Avatar, Icon, ListItem } from '@react-native-material/core'
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image } from 'react-native'
 import { styles } from '../themes/appTheme'
@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { collection, getDocs } from 'firebase/firestore'
 import dataBase from '../utils/firebase'
 import { ImagesPicker } from './ImagesPicker'
+import { Divider, List } from 'react-native-paper'
 
 
 export const UserPanel = ({navigation}) => {
@@ -16,12 +17,48 @@ export const UserPanel = ({navigation}) => {
 
 
   return (
-    <View style={ styles.globalMargin }>
+    <View style={ [styles.globalMargin, { height: '100%'} ]}>
         <ImagesPicker/>
-        <ListItem title="Informacion Personal" onPress={() => navigation.navigate('Informacion')} />
-        <ListItem title="Historial de pedidos" onPress={() => navigation.navigate('Ordenes')}/>
-        <ListItem title="Mis Direcciones" onPress={() => navigation.navigate('Direcciones')}/>
-        <ListItem title='Cambiar contraseña' />
+        <List.Item
+          title="Información Personal"
+          description="Editar informacion personal"
+          left={props => <List.Icon {...props} icon="account" color='aliceblue' />}
+          titleStyle={{color: 'aliceblue', fontSize: 20}}
+          descriptionStyle={{color: '#FBE4D8', fontSize: 11}}
+          onPress={() => navigation.navigate('Informacion')}
+          style={{backgroundColor: '#2B124C'}}
+        />
+        <Divider/>
+        <List.Item
+          title="Historial de pedidos"
+          description="ver historial de pedidos"
+          left={props => <List.Icon {...props} icon="cart" color='aliceblue' />}
+          titleStyle={{color: 'aliceblue', fontSize: 20}}
+          descriptionStyle={{color: '#FBE4D8', fontSize: 11}}
+          onPress={() => navigation.navigate('Ordenes')}
+          style={{backgroundColor: '#2B124C'}}
+        />
+        <Divider/>
+        <List.Item
+          title="Mis direcciones"
+          description="Lista de direcciones"
+          left={props => <List.Icon {...props} icon="pencil" color='aliceblue' />}
+          titleStyle={{color: 'aliceblue', fontSize: 20}}
+          descriptionStyle={{color: '#FBE4D8', fontSize: 11}}
+          onPress={() => navigation.navigate('Direcciones')}
+          style={{backgroundColor: '#2B124C'}}
+        />
+        <Divider/>
+        <List.Item
+          title="Contrasña"
+          description="cambiar contraseña"
+          left={props => <List.Icon {...props} icon="key" color='aliceblue' />}
+          titleStyle={{color: 'aliceblue', fontSize: 20}}
+          descriptionStyle={{color: '#FBE4D8', fontSize: 11}}
+          onPress={() => navigation.navigate('Ordenes')}
+          style={{backgroundColor: '#2B124C'}}
+        />
+
         
     </View>
   )
