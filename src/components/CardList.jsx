@@ -5,7 +5,7 @@ import { styles } from '../themes/appTheme'
 import Carousel from 'react-native-reanimated-carousel';
 //import { useProducts } from '../hooks/useProducts';
 import { useSelector, useDispatch } from 'react-redux';
-import { filterProduct, selectProduct, getProduct } from '../store/actions/product.action';
+import { filterProduct, getProduct, selectProduct } from '../store/actions/product.action';
 import { useProducts } from '../hooks/useProducts';
 
 
@@ -21,8 +21,8 @@ export const CardList = ({ navigation}) => {
     },[])
 
     const onHandleSelectedProduct = (item) =>{
-        dispatch(selectProduct(item.id));
-        console.log('producto desde handle: ',item)
+        dispatch(selectProduct(item));
+        console.log('id desde cardlist: ',item.id)
         navigation.navigate('Detalle', {name:  item.titulo})
     }
   return (
@@ -37,7 +37,7 @@ export const CardList = ({ navigation}) => {
                     <View key={index} >
                         <Image 
                             source={{uri: item.imagen}}
-                            style={{width: 300, height: 300}} 
+                            style={{width: 280, height: 280}} 
                         />       
                         <Text style={ styles.globalText}>{item.titulo}</Text>
                         <Button  

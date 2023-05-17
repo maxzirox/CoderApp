@@ -1,5 +1,5 @@
 import React from 'react'
-import { KeyboardAvoidingView, Text, View } from 'react-native'
+import { Image, KeyboardAvoidingView, Text, View } from 'react-native'
 import { styles } from '../themes/appTheme'
 import { Button, TextInput } from 'react-native-paper'
 import { useState } from 'react'
@@ -8,27 +8,43 @@ import { signin, signup } from '../store/actions/auth.action'
 
 
 export const SignIn = ({navigation}) => {
-    const title = 'Ingresar',
+    const title = 'Iniciar Sesión',
           message = 'Crea una cuenta',
-          messageAction = 'Ingresar',
+          messageAction = 'Login',
           messageTarget = 'login';
 
     const dispatch = useDispatch();
     const [formValue, setFormValue] = useState({
         email: '',
         password: '',
+        error: ''
       });
 //enviamos la informacion a la store.
     const handleSignUp = () => {
-        dispatch(signin(formValue.email, formValue.password));
-        alert(`El usuario ${formValue.email} ingreso con exito`)
+        emailValidation(formValue.email)
+        if(emailValidation){
+            dispatch(signin(formValue.email, formValue.password))
+        }
+
     }
+    const emailValidation = (email) =>{
+        const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if(!email || regex.test(email) === false){
+            setFormValue({
+                error: "Email invalido"
+            });
+            return false;
+        }
+        return true;
+    }
+
   return (
     <KeyboardAvoidingView
         behavior='height'
         style={styles.authContainer}
     >
         <View>
+        <Image style={{width: 210, height: 120, alignSelf: 'center', marginTop: 10}} source={{ uri:'https://firebasestorage.googleapis.com/v0/b/wellnesgym-47cea.appspot.com/o/logos%2Flogo-kpc3.png?alt=media&token=e5666ce9-d91d-4a3b-92d5-5cfa9294b083'}} />
             <Text style={styles.authTitle}>
                 {title}
             </Text>
@@ -40,6 +56,7 @@ export const SignIn = ({navigation}) => {
                 onChangeText={(value) => setFormValue({... formValue, email: value})}
                 value={formValue.email}
             />
+            <Text style={{color: 'red', fontSize: 10}}>{formValue.error}</Text>
             <TextInput
                 label="Password"
                 secureTextEntry
@@ -51,9 +68,9 @@ export const SignIn = ({navigation}) => {
             />
             <View style={styles.promp}>
                 <Button  mode="outlined"  onPress={()=> handleSignUp()}>
-                    <Text>{messageAction}</Text>
+                    <Text style={styles.authText}>{messageAction}</Text>
                 </Button>
-                <Button mode='outlined' onPress={() => navigation.navigate('Register')}>
+                <Button mode='text' onPress={() => navigation.navigate('Register')}>
                     <Text style={styles.authText}>{message}</Text>
                 </Button>
                 

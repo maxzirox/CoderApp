@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
         marginVertical: 5
     },
     cartTotal: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
         backgroundColor: '#2B124C', 
         height: 50, 
         borderRadius: 10, 
@@ -80,7 +80,7 @@ export const styles = StyleSheet.create({
         borderRadius: 30,
     },
     authContainer: {
-        marginTop: 100,
+        marginTop: 150,
         width: '80%',
         maxWidth: 400,
         padding: 12,
@@ -88,20 +88,22 @@ export const styles = StyleSheet.create({
         borderColor: '#ccc',
         borderWidth: 1,
         borderRadius: 10,
-        backgroundColor: '#5b3a61',
+        backgroundColor: '#2B124C',
         alignSelf: 'center',
         alignItems: 'center',
     },
     authTitle: {
-        fontSize: 24,
+        fontSize: 30,
         marginBottom: 18,
         textAlign: 'center',
+        color: 'aliceblue'
     },
     authText: {
         textAlign: 'center',
         fontSize: 15,
         alignItems: 'center',
-        alignContent: 'center'
+        alignContent: 'center',
+        color: 'aliceblue'
     },
     promp: {
         alignItems: 'center',

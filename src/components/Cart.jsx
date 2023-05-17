@@ -6,6 +6,7 @@ import { styles } from '../themes/appTheme';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { confirmCart } from '../store/actions/cart.action';
+import { Button } from 'react-native-paper';
 export const Cart = () => {
   const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ export const Cart = () => {
     <View style={styles.cartCard}>
       <Image 
         source={{uri: item.imagen}}
-        style={{width: 50, height: 50, marginHorizontal: 10}} 
+        style={{width: 50, height: 50, marginHorizontal: 10, alignSelf: 'center'}} 
         alt='imagen'
       />
       <View style={{flexDirection: 'column', alignSelf: 'center', marginHorizontal: 10}}>
@@ -43,7 +44,7 @@ export const Cart = () => {
           ${item.quantity * item.precio}
         </Text>
         <TouchableOpacity >
-          <MaterialCommunityIcons onPress={() => handlerDeleteItem(item.id)} name="delete" size={25} style={{alignSelf:'center', color: 'aliceblue'}} />
+          <MaterialCommunityIcons onPress={() => handlerDeleteItem(item.id)} name="delete" size={25} style={{ color: 'aliceblue'}} />
         </TouchableOpacity>
     </View>
   )}
@@ -57,11 +58,15 @@ export const Cart = () => {
         keyExtractor={item => item.id}
       />
       <View style={styles.cartTotal}>
-          <Text style={{color: 'aliceblue'}}> productos: {items.length}</Text>
-          <Text style={{color: 'aliceblue'}}> Total: {total}</Text>
-          <TouchableOpacity>
-            <Text style={{color: 'aliceblue'}} onPress={()=>handlerConfirmCart()} >Continuar</Text>
-          </TouchableOpacity>
+        <View style={{marginLeft: 20}}>
+            <Text style={{color: 'aliceblue'}}> Productos:  {items.length}</Text>
+            <Text style={{color: 'aliceblue'}}> Total a pagar: ${total}</Text>
+        </View>
+        <View style={{justifyContent: 'space-between', marginLeft: 80, alignSelf: 'center'}}>
+            <Button mode='outlined' onPress={()=>handlerConfirmCart()} >
+              <Text style={{color: 'aliceblue'}}  >Pagar</Text>
+            </Button>
+        </View>
       </View>
     </View>
   )

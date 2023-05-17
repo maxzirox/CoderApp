@@ -15,6 +15,8 @@ import { useEffect } from 'react';
 import { getInfo, getOrders } from '../store/actions/user.action';
 import { OrdersScreen } from '../screens/OrdersScreen';
 import { UserScreen } from '../screens/UserScreen';
+import { logOut } from '../store/actions/auth.action';
+import { PasswordChangeScreen } from '../screens/PasswordChangeScreen';
 
 
 
@@ -36,6 +38,7 @@ export const DrawerNavigator = () => {
         <Drawer.Screen name="Direcciones" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={PlacesScreen} />
         <Drawer.Screen name="Informacion" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={UserInfoScreen} />
         <Drawer.Screen name="Ordenes" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={OrdersScreen} />
+        <Drawer.Screen name="Contraseña" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={PasswordChangeScreen} />
 
         {/*<Drawer.Screen name="Productos" component={BottomNavigator}/>*/}
     </Drawer.Navigator>
@@ -94,7 +97,19 @@ const InternalMenu = ({ navigation }) => {
           })
           
         }
+        {/*<TouchableOpacity
+          style={styles.buttonMenu}
+          onPress={ () => {
+            dispatch(logOut())
+            .then(()=> navigation.navigate('Auth'))
+
+          }} 
+        >
+        <Text style={ styles.textMenu}>Log Out</Text>
+        </TouchableOpacity>*/}
       </View>
+
+            
     </DrawerContentScrollView>
     
   );

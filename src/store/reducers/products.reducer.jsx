@@ -7,7 +7,7 @@ import { SELECT_PRODUCT, FILTER_PRODUCT, GET_PRODUCTS, ADD_PRODUCT } from "../ac
 const initialState = {
     products: [],
     filteredProducts: [],
-    selected: null,
+    selected: [],
 }
 
 const ProductReducer = (state = initialState, action) => {
@@ -17,17 +17,21 @@ const ProductReducer = (state = initialState, action) => {
                 ...state,
                 products: action.payload,
             }
-        case SELECT_PRODUCT:
-            const indexProduct = state.products.findIndex((product) => product.id === action.productId)
-            if(indexProduct === -1) return state;
-            //copiamos el estado con el spring operator y seleccionamos el producto que le pasamos con el index
-            return{ ...state, selected: state.products[indexProduct]}
         case FILTER_PRODUCT:
             return{ ...state, filteredProducts: state.products.filter(product => product.id === action.productId)}
         
         case ADD_PRODUCT:
             const newState = []
-            return newState
+            return{
+                ...state,
+                products: action.products,
+                
+            } 
+        case SELECT_PRODUCT:
+            return{
+                ...state,
+                selected: action.selected
+            }
             
         default:
             return state;

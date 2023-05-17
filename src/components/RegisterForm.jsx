@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { signup } from '../store/actions/auth.action'
 
 
-export const RegisterForm = () => {
+export const RegisterForm = ({navigation}) => {
     const title = 'Regístrate',
           message = '¿Ya tienes cuenta?',
           messageAction = 'Crear cuenta',
@@ -26,6 +26,7 @@ export const RegisterForm = () => {
         alert(`El producto ${formValue.name} fue agregado con exito`)
     }
   return (
+    <View style={styles.globalMargin}>
     <KeyboardAvoidingView
         behavior='height'
         style={styles.authContainer}
@@ -67,11 +68,12 @@ export const RegisterForm = () => {
             />
             <View style={styles.promp}>
                 <Button  mode="outlined"  onPress={()=> handleSignUp()}>
-                    <Text>{messageAction}</Text>
+                    <Text style={styles.authText}>{messageAction}</Text>
                 </Button>
-                <Text style={styles.authText}>{message}</Text>
+                <Text style={styles.authText} onPress={()=> navigation.navigate('Auth')}>{message}</Text>
             </View>
         </View>
     </KeyboardAvoidingView>   
+    </View>
   )
 }

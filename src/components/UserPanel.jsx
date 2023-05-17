@@ -50,12 +50,12 @@ export const UserPanel = ({navigation}) => {
         />
         <Divider/>
         <List.Item
-          title="Contrasña"
+          title="Contraseña"
           description="cambiar contraseña"
           left={props => <List.Icon {...props} icon="key" color='aliceblue' />}
           titleStyle={{color: 'aliceblue', fontSize: 20}}
           descriptionStyle={{color: '#FBE4D8', fontSize: 11}}
-          onPress={() => navigation.navigate('Ordenes')}
+          onPress={() => navigation.navigate('Contraseña')}
           style={{backgroundColor: '#2B124C'}}
         />
 

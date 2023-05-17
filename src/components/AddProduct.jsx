@@ -1,30 +1,50 @@
-import { AppBar, Switch, TextInput } from '@react-native-material/core'
+import { AppBar, Switch } from '@react-native-material/core'
 import React, { useState } from 'react'
 import { View, Text, SafeAreaView, ScrollView, StatusBar } from 'react-native'
 import { styles } from '../themes/appTheme'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../store/actions/product.action'
-import { Button } from 'react-native-paper'
+import { Button, List, TextInput } from 'react-native-paper'
+import * as ImagePicker from 'expo-image-picker';
 
 export const AddProduct = () => {
-    
+    const userID = useSelector(state => state.user.userId)
+    const logId = useSelector(state => state.auth.userId)
     const dispatch = useDispatch();
     const [formValue, setFormValue] = useState({
         categoria: '',
         descripcion: '',
-        imagen: '',
         precio: 0,
         stock: '',
         titulo: ''
       });
-
+    const [imagen, setImagen] = useState(null);
     const [checked, setChecked] = useState(false);
-
+    
+    const pickImageCamera = async () => {
+        let result = await ImagePicker.launchCameraAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [3, 3],
+          quality: 1,
+          base64: false,
+        })
+        if (!result.canceled) {
+          let uriParts = result.assets[0].uri.split('.')
+          let fileType = uriParts[uriParts.length - 1]
+          let date = new Date();
+          setImagen({
+            name: `photo${date}.${fileType}`,
+            type: `image/${fileType}`,
+            uri: result.assets[0].uri
+          });
+        }
+      };
     const handleSubmit = () =>{
-        console.log(formValue) 
+        console.log('imagen desde addProduct: ', imagen) 
         //setFormValue({...formValue})
-         dispatch(addProduct(formValue))
-         alert(`El producto ${formValue.titulo} fue agregado con exito`)
+         dispatch(addProduct(formValue, imagen))
+         .then(()=> alert(`El producto ${formValue.titulo} fue agregado con exito`))
 
       }
 
@@ -57,7 +77,7 @@ export const AddProduct = () => {
                 <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, descripcion: value})} placeholder="Descripcion" style={{ margin: 16 }} />
                 <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, stock: value})} placeholder="Stock" style={{ margin: 16 }} />
                 <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, precio: value})} placeholder="Precio" style={{ margin: 16 }} />
-                <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, imagen: value})} placeholder="Url Imagen" style={{ margin: 16 }} />
+                <TextInput variant="outlined" right={<TextInput.Icon icon="camera" onPress={()=>pickImageCamera()} />} onChangeText={(value) => setFormValue({... formValue, imagen: value})} placeholder="Url Imagen" style={{ margin: 16 }} />
                 <Button
                     title= 'Agregar'
                     onPress= {() => handleSubmit()}
