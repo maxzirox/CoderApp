@@ -1,6 +1,7 @@
 import { addDoc, collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import dataBase, { URL_AUTH_SINGIN, URL_AUTH_SINGUP, URL_CHANGE_PASS } from "../../utils/firebase";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { Alert } from "react-native";
 
 export const SIGNUP = 'SIGN_UP';
 export const SIGNIN = 'SIGN_IN';
@@ -55,14 +56,24 @@ export const signin = (email, password) =>{
                 returnSecureToken: true,
             }),
         });
-
-            const data = await response.json();
-                dispatch({
-                    type: SIGNIN,
-                    token: data.idToken,
-                    userId: data.localId,
-                    //data: userData,
-                });
+        const data = await response.json();
+        if(data.error){
+        if(data.error.message === 'EMAIL_NOT_FOUND'){
+            Alert.alert('Email inválido', 'Correo no registrado')
+        }
+        if(data.error.message === 'INVALID_PASSWORD'){
+            Alert.alert('Password inválido', 'Porfavor escribe la contraseña correcta')
+        }else{
+            Alert.alert('Demasiados intentos', 'Contraseña momentaneamente bloqueada por demasiados intentos incorrectos, intente dentro de unos minutos o restasblezca su password')
+        }}else{
+            dispatch({
+                type: SIGNIN,
+                token: data.idToken,
+                userId: data.localId,
+                //data: userData,
+            });
+        }
+            
     }
 }
 
@@ -72,8 +83,8 @@ export const logOut = () => {
         dispatch({
             type: LOG_OUT,
             token: null,
-            //userId: data.localId,
-            //data: userData,
+            userId: null,
+            data: [],
         });
 
     }

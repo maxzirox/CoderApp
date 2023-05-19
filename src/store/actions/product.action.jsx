@@ -48,7 +48,6 @@ export const addProduct = (payload, imagen) =>{
         })
 
         try{
-            console.log('imagen desde action: ', imagen)
             let URL = '';
               const storage = getStorage();
               const storageRef = ref(storage, `Product/${imagen.name}`);
@@ -70,7 +69,6 @@ export const addProduct = (payload, imagen) =>{
                  })
             const productSnapshot = await getDocs(collection(dataBase, 'productos'));
             const productList = productSnapshot.docs.map((item) => item.data()); 
-            console.log('productos desde action add: ', productList)
             dispatch({
                 type: ADD_PRODUCT,
                 products: productList,

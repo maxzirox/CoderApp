@@ -22,7 +22,6 @@ export const CardList = ({ navigation}) => {
 
     const onHandleSelectedProduct = (item) =>{
         dispatch(selectProduct(item));
-        console.log('id desde cardlist: ',item.id)
         navigation.navigate('Detalle', {name:  item.titulo})
     }
   return (

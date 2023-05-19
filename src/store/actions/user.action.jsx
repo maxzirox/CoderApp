@@ -127,7 +127,6 @@ export const getOrders = (userId) => {
       const orderQuery = query(collection(dataBase, 'ordenes'), where('idCliente', '==', userId))
       const querySnapshot = await getDocs(orderQuery)
       const ordersData = querySnapshot.docs.map(item => item.data())
-      console.log('orders desde action: ', ordersData)
       dispatch({
         type: GET_ORDERS,
         orders: ordersData,
