@@ -1,4 +1,4 @@
-import { SIGNUP, SIGNIN, GET_IMAGE, LOG_OUT, CHANGE_PASS } from "../actions/auth.action";
+import { SIGNUP, SIGNIN, GET_IMAGE, LOG_OUT, CHANGE_PASS, CHANGE_EMAIL } from "../actions/auth.action";
 
 const INITIAL_STATE = {
     token: null,
@@ -37,6 +37,10 @@ export const AuthReducer = (state = INITIAL_STATE, action) =>{
         case CHANGE_PASS:
             return{
                ...state
+            }
+        case CHANGE_EMAIL:
+            return{
+                ...state
             }
         default:
             return state

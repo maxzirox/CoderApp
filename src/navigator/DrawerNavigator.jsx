@@ -64,7 +64,7 @@ const InternalMenu = ({ navigation }) => {
       <View style={styles.avatarContainer }>
         <Image 
           source={{
-            uri: `${image}`
+            uri: `${image !== '' ? image : undefined}`
           }}
           style={ styles.avatar }
         />

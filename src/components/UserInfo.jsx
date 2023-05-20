@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native'
+import { Alert, Image, ScrollView, Text, View } from 'react-native'
 import { Button, TextInput } from 'react-native-paper'
 import { useDispatch, useSelector } from 'react-redux';
 import { styles } from '../themes/appTheme';
@@ -16,7 +16,6 @@ export const UserInfo = () => {
         email: '',
         phone: '',
       });
-      console.log('desde componente: ',userData)
     const [checked, setChecked] = useState(false);
     
     const image = userData.map(item => item.imagen)
@@ -29,52 +28,24 @@ export const UserInfo = () => {
       dispatch(getInfo(logId))
       .then(info => {
         userData = [info]
-        console.log('desde useEffect: ',userData)
+        console.log('recargado')
         setChecked(false)
       } )
     }, [checked])
 
     const onHandleChange = (type, data) =>{
-      if(type === 'Name'){
-        dispatch(editInfo(data, userEmail, userPhone, logId, userId))
+      if(type && data !== ''){
+        dispatch(editInfo(data, logId, userId, type))
         .then(()=>{
-          alert(`Nombre ${data} Cambiado con exito`);
+          Alert.alert('Felicidades', `${type} Cambiado con exito`);
           handleReset();
           setChecked(true)
         }) 
-      }
-      if(type === 'Email'){
-        dispatch(editInfo(userName, data, userPhone, logId, userId))
-        .then(()=>{
-          alert(`Email ${data} Cambiado con exito`);
-          handleReset();
-          setChecked(true)
-        })
-      }
-      if(type === 'Phone'){
-        dispatch(editInfo(userName, userEmail, data, logId, userId))
-        .then(()=>{
-          alert(`Numero cambiado con exito`);
-          handleReset();
-          setChecked(true)
-        })
+      }else{
+      Alert.alert('Error', `Debes ingresar un ${type}`)
       }
     }
 
-    const handleSubmit = () =>{
-      if(formValue.name || !formValue.email || !formValue.phone){
-        dispatch(editInfo(formValue.name, formValue.email, formValue.phone, logId, userId))
-        .then(()=>{
-          alert(`Nombre Cambiado con exito`);
-          handleReset();
-          setChecked(true)
-        })
-      }
-
-         
-         
-
-      }
 
     const handleReset = () =>{
         setFormValue({
@@ -90,38 +61,42 @@ export const UserInfo = () => {
         <View style={{backgroundColor: '#2B124C'}}>
             <Text style={{ alignSelf: 'center', marginVertical: 20, fontSize: 20, color: 'aliceblue' }}>Editar informacion personal</Text>
             <TextInput 
-              variant="outlined" 
+              mode="flat" 
               onChangeText={(value) => setFormValue({... formValue, name: value})} 
               label='Nombre' 
               placeholder={`${userName}`} 
               style={{ margin: 16 }} 
               right={<TextInput.Icon icon="pencil" onPress={() => onHandleChange('Name', formValue.name)}/>}
+              value={formValue.name}
               />
             <TextInput 
-              variant="outlined" 
+              mode="flat" 
               onChangeText={(value) => setFormValue({... formValue, email: value})} 
               label='Correo' 
               placeholder={`${userEmail}`} 
               style={{ margin: 16 }} 
               right={<TextInput.Icon icon="pencil" onPress={() => onHandleChange('Email', formValue.email)}/>}
+              value={formValue.email}
               />
             { userPhone ?
               <TextInput
-                variant="outlined" 
+                mode="flat" 
                 onChangeText={(value) => setFormValue({... formValue, phone: value})} 
                 label='Telefono'
                 placeholder={`${userPhone}`} 
                 style={{ margin: 16 }} 
                 right={<TextInput.Icon icon="pencil" onPress={() => onHandleChange('Phone', formValue.phone)}/>}
+                value={formValue.phone}
                 />
               :
               <TextInput 
-                variant="outlined" 
+                mode="flat" 
                 onChangeText={(value) => setFormValue({... formValue, phone: value})}  
                 label='Telefono' 
                 placeholder='Numbero Telefonico' 
                 style={{ margin: 16 }} 
                 right={<TextInput.Icon icon="pencil" onPress={() => onHandleChange('Phone', formValue.phone)}/>}
+                value={formValue.phone}
                 />
 
             }

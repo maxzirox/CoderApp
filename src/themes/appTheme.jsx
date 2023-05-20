@@ -118,7 +118,7 @@ export const styles = StyleSheet.create({
     cartOrders: {
         flexDirection: 'column', 
         backgroundColor: '#2B124C', 
-        height: 120, 
+        height: 'auto', 
         borderRadius: 10, 
         marginHorizontal: 20,
         marginVertical: 5

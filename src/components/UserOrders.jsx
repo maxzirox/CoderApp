@@ -10,13 +10,13 @@ export const UserOrders = () => {
 
     const userOrders = useSelector(state => state.user.orders)
 
-    console.log('ordenes desde userOrder: ', userOrders)
     const CardOrder = ({item}) => {
       return(
         <View style={styles.cartOrders}>
           <View>
+            <Text>boleta</Text>
             <Text style={{textAlign: 'center', fontSize: 20, color: 'aliceblue'}}>
-              {item.Cliente.name}
+              {item.id}
             </Text>
           </View>
           <View style={{flexDirection: 'column', alignSelf: 'center', marginHorizontal: 10}}>
@@ -42,9 +42,9 @@ export const UserOrders = () => {
           <FlatList
             data={userOrders}
             renderItem={({item}) => ( 
-              <CardOrder item={item}/> 
+              <CardOrder item={item} key={item.id}/> 
               )}
-            keyExtractor={item => item}
+            
           />
         </View>
       )

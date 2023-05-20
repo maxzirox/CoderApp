@@ -96,23 +96,21 @@ export const getImage = (image, userId, name, logId) =>{
   }
 }
 
-export const editInfo = ( nombre, email, phone, logId, userId) => {
+export const editInfo = ( data, logId, userId, type) => {
   return async dispatch => {
     const userDocRef = doc(dataBase, 'usuarios', userId)
     try{
-      if(email === ' ' || phone === ' ' || nombre){
+      if(type === 'Name'){
         await updateDoc(userDocRef, { 
-          name: nombre
+          name: data, 
         })
-      }
-      if(email === ' ' || phone || nombre === ''){
-        await updateDoc(userDocRef, { 
-          phone: phone
+      }if(type === 'Email'){
+        await updateDoc(userDocRef, {  
+          email: data,
         })
-      }
-      if(email || phone === ' ' || nombre == ''){
+      }if(type === 'Phone'){
         await updateDoc(userDocRef, { 
-          email: email
+          phone: data,
         })
       }
 
@@ -135,7 +133,12 @@ export const getOrders = (userId) => {
     try{
       const orderQuery = query(collection(dataBase, 'ordenes'), where('idCliente', '==', userId))
       const querySnapshot = await getDocs(orderQuery)
-      const ordersData = querySnapshot.docs.map(item => item.data())
+      const ordersData = querySnapshot.docs.map(item =>{
+        let orders 
+        orders = item.data()
+        orders.id = item.id
+        return orders
+        })
       dispatch({
         type: GET_ORDERS,
         orders: ordersData,

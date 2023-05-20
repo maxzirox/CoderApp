@@ -35,7 +35,7 @@ export const CardList = ({ navigation}) => {
                 <View style={{ margin: 50}}>
                     <View key={index} >
                         <Image 
-                            source={{uri: item.imagen}}
+                            source={{uri: item.imagen !== ' ' ? item.imagen : undefined }}
                             style={{width: 280, height: 280}} 
                         />       
                         <Text style={ styles.globalText}>{item.titulo}</Text>

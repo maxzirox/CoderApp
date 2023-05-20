@@ -8,6 +8,7 @@ export const SIGNIN = 'SIGN_IN';
 export const GET_IMAGE = 'GET_IMAGE';
 export const LOG_OUT = 'LOG_OUT';
 export const CHANGE_PASS = 'CHANGE_PASS';
+export const CHANGE_EMAIL = 'CHANGE_EMAIL';
 
 export const signup = (payload) => {
     return async dispatch => {
@@ -110,6 +111,35 @@ export const changePassword = (token, newPassword) => {
         
         dispatch({
             type: CHANGE_PASS,
+        });
+
+    }
+}
+
+export const changeEmail = (token, newEmail) => {
+    return async dispatch => {
+        
+        const response = await fetch(URL_CHANGE_PASS, {
+            method: 'POST',
+            header: {
+                'Countent-Type': 'aplication/json',
+            },
+            body: JSON.stringify({
+                idToken: token,
+                email: newEmail,
+                returnSecureToken: true,
+            }),
+        });
+
+        //const data = await response.json();
+        //const userQuery = query(collection(dataBase, 'usuarios'), where('userId', '==', data.localId))
+        //const querySnapshot = await getDocs(userQuery)
+        //const userId = querySnapshot.docs.map(item => item.id)
+        //const userData = querySnapshot.docs.map(item => item.data());
+
+        
+        dispatch({
+            type: CHANGE_EMAIL,
         });
 
     }
