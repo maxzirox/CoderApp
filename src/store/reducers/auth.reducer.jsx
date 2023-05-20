@@ -13,9 +13,9 @@ export const AuthReducer = (state = INITIAL_STATE, action) =>{
         case SIGNUP:
             return{
                 ...state,
-                token: action.token,
-                userId: action.userId,
-                data: action.data
+                //token: action.token,
+                //userId: action.userId,
+                //data: action.data
             };
         case SIGNIN:
             return{

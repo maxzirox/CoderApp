@@ -1,5 +1,5 @@
 import React from 'react'
-import { KeyboardAvoidingView, Text, View } from 'react-native'
+import { Alert, KeyboardAvoidingView, Text, View } from 'react-native'
 import { styles } from '../themes/appTheme'
 import { Button, TextInput } from 'react-native-paper'
 import { useState } from 'react'
@@ -20,10 +20,26 @@ export const RegisterForm = ({navigation}) => {
         email: '',
         password: '',
       });
+    const emailValidation = (email) =>{
+        const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if(!email || regex.test(email) === false){
+            //alert('email invalido')
+            return false;
+        }
+        return true;
+    }
 //enviamos la informacion a la store.
     const handleSignUp = () => {
-        dispatch(signup(formValue));
-        alert(`El producto ${formValue.name} fue agregado con exito`)
+
+        if(!formValue.password || !formValue.name || !formValue.address || !formValue.email){
+            if(emailValidation(formValue.email)){
+                Alert.alert('Error', 'Debes completar todos los campos para registrar un nuevo usuario')
+            }
+        }else{
+            dispatch(signup(formValue));
+            Alert.alert('Felicidades',`El Usuario ${formValue.name} fue agregado con exito`)
+        }
+        
     }
   return (
     <View style={styles.globalMargin}>
@@ -36,7 +52,7 @@ export const RegisterForm = ({navigation}) => {
                 {title}
             </Text>
             <TextInput
-                label='Nombre'
+                label={'Nombre'}
                 style={styles.formInput}
                 autoCapitalize='none'
                 onChangeText={(value) => setFormValue({... formValue, name: value})}

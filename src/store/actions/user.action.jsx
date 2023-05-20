@@ -100,13 +100,22 @@ export const editInfo = ( nombre, email, phone, logId, userId) => {
   return async dispatch => {
     const userDocRef = doc(dataBase, 'usuarios', userId)
     try{
-      
-      await updateDoc(userDocRef, { 
-        name: nombre,
-        email: email,
-        phone: phone  
-      })
-      .then(alert(`Nueva direccion registrada con exito`))
+      if(email === ' ' || phone === ' ' || nombre){
+        await updateDoc(userDocRef, { 
+          name: nombre
+        })
+      }
+      if(email === ' ' || phone || nombre === ''){
+        await updateDoc(userDocRef, { 
+          phone: phone
+        })
+      }
+      if(email || phone === ' ' || nombre == ''){
+        await updateDoc(userDocRef, { 
+          email: email
+        })
+      }
+
       const userQuery = query(collection(dataBase, 'usuarios'), where('userId', '==', logId))
       const querySnapshot = await getDocs(userQuery)
       const userData = querySnapshot.docs.map(item => item.data());
@@ -127,7 +136,6 @@ export const getOrders = (userId) => {
       const orderQuery = query(collection(dataBase, 'ordenes'), where('idCliente', '==', userId))
       const querySnapshot = await getDocs(orderQuery)
       const ordersData = querySnapshot.docs.map(item => item.data())
-      console.log('orders desde action: ', ordersData)
       dispatch({
         type: GET_ORDERS,
         orders: ordersData,

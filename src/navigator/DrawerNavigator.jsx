@@ -2,6 +2,7 @@ import react from 'react';
 //import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeScreen } from '../screens/HomeScreen';
 import { AdminScreen } from '../screens/AdminScreen';
+import { AuthScreen } from '../screens/AuthScreen';
 import { DrawerContentScrollView, createDrawerNavigator } from '@react-navigation/drawer';
 import { UserPanel } from '../components/UserPanel';
 import { DetailScreen } from '../screens/DetailScreen';
@@ -39,7 +40,7 @@ export const DrawerNavigator = () => {
         <Drawer.Screen name="Informacion" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={UserInfoScreen} />
         <Drawer.Screen name="Ordenes" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={OrdersScreen} />
         <Drawer.Screen name="Contraseña" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={PasswordChangeScreen} />
-
+        <Drawer.Screen name="LogIn" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={AuthScreen} />
         {/*<Drawer.Screen name="Productos" component={BottomNavigator}/>*/}
     </Drawer.Navigator>
   );
@@ -97,16 +98,16 @@ const InternalMenu = ({ navigation }) => {
           })
           
         }
-        {/*<TouchableOpacity
+        <TouchableOpacity
           style={styles.buttonMenu}
           onPress={ () => {
             dispatch(logOut())
-            .then(()=> navigation.navigate('Auth'))
+            .then(()=> navigation.navigate('LogIn'))
 
           }} 
         >
         <Text style={ styles.textMenu}>Log Out</Text>
-        </TouchableOpacity>*/}
+        </TouchableOpacity>
       </View>
 
             
