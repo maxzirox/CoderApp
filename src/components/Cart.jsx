@@ -18,9 +18,9 @@ export const Cart = () => {
     const handlerDeleteItem = (id) => dispatch(removeItem(id));
     const handlerConfirmCart = () =>{
       let date = new Date();
-      console.log(date.toISOString()); 
-      //dispatch(confirmCart(items, total, userInfo))
-      //.then(()=>{alert('Gracias por comprar en nuestra tienda')})
+     
+      dispatch(confirmCart(items, total, userInfo, date.toISOString()))
+      .then(()=>{alert('Gracias por comprar en nuestra tienda')})
     }
     //() => { console.log('items desde cart: ', items); }
   const CardCart = ({item}) => {
