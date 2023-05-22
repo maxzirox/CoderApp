@@ -53,18 +53,15 @@ const InternalMenu = ({ navigation }) => {
   const isAdmin = userData.map(item => item.isAdmin)
   const buttons = ['Home', 'Productos', 'Admin', 'Perfil']
 
-  const image = userData.map(item => item.imagen)
-
   useEffect(()=>{
     dispatch(getInfo(userId))
-    dispatch(getOrders(userId))
   }, [])
   return(
     <DrawerContentScrollView style={styles.globalMargin}>
       <View style={styles.avatarContainer }>
         <Image 
           source={{
-            uri: `${image !== '' ? image : undefined}`
+            uri: userData[0].imagen
           }}
           style={ styles.avatar }
         />
@@ -101,9 +98,7 @@ const InternalMenu = ({ navigation }) => {
         <TouchableOpacity
           style={styles.buttonMenu}
           onPress={ () => {
-            dispatch(logOut())
-            .then(()=> navigation.navigate('LogIn'))
-
+            dispatch(logOut(userId))
           }} 
         >
         <Text style={ styles.textMenu}>Log Out</Text>
