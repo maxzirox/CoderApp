@@ -4,12 +4,15 @@ import { DrawerNavigator } from './DrawerNavigator'
 import { AuthNavigator } from './AuthNavigator'
 import { useSelector } from 'react-redux'
 
+
 export const NavigatorContainer = () => {
-    const userId = useSelector(state => state.auth.userId)
+
+    const token = useSelector(state => state.auth.token);
+
   return (
     
     <NavigationContainer>
-    {userId
+    {token
         ? <DrawerNavigator/>
         : <AuthNavigator />
     }

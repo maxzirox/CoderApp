@@ -74,13 +74,22 @@ export const signin = (email, password) =>{
     }
 }
 
-export const logOut = () => {
+export const logOut = (logId) => {
     return async dispatch => {
-        
+        const response = await fetch(URL_CHANGE_PASS, {
+            method: 'POST',
+            header: {
+                'Countent-Type': 'aplication/json',
+            },
+            body: JSON.stringify({
+                localId: logId
+            }),
+        });
+        const data = await response.json();
         dispatch({
             type: LOG_OUT,
             token: null,
-            userId: null,
+            userId: data.localId,
             data: [],
         });
 

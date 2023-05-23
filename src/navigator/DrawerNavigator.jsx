@@ -18,6 +18,7 @@ import { OrdersScreen } from '../screens/OrdersScreen';
 import { UserScreen } from '../screens/UserScreen';
 import { logOut } from '../store/actions/auth.action';
 import { PasswordChangeScreen } from '../screens/PasswordChangeScreen';
+import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 
 
 
@@ -47,27 +48,32 @@ export const DrawerNavigator = () => {
 }
 
 const InternalMenu = ({ navigation }) => {
+  useEffect(()=>{
+    dispatch(getInfo(userId))
+    console.log('userData desde drawer: ', userData.imagen)
+  }, [])
   const dispatch = useDispatch()
   const userId = useSelector(state=> state.auth.userId)
   const userData = useSelector(state => state.user.data)
   const isAdmin = userData.map(item => item.isAdmin)
   const buttons = ['Home', 'Productos', 'Admin', 'Perfil']
+  const imagen = userData.map(item => item.imagen)
 
-  const image = userData.map(item => item.imagen)
 
-  useEffect(()=>{
-    dispatch(getInfo(userId))
-    dispatch(getOrders(userId))
-  }, [])
   return(
     <DrawerContentScrollView style={styles.globalMargin}>
       <View style={styles.avatarContainer }>
-        <Image 
+        {userData === '' ?
+          <ActivityIndicator animating={true} color={MD2Colors.red800} />
+          :
+          <Image 
           source={{
-            uri: `${image !== '' ? image : undefined}`
+            uri: `${imagen}`
           }}
           style={ styles.avatar }
         />
+        }
+
       </View>
 
       <View style={ styles.drawerMenu}>
@@ -101,9 +107,7 @@ const InternalMenu = ({ navigation }) => {
         <TouchableOpacity
           style={styles.buttonMenu}
           onPress={ () => {
-            dispatch(logOut())
-            .then(()=> navigation.navigate('LogIn'))
-
+            dispatch(logOut(userId))
           }} 
         >
         <Text style={ styles.textMenu}>Log Out</Text>

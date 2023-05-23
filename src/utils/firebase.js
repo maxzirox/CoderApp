@@ -24,4 +24,6 @@ export const URL_AUTH_SINGUP ='https://identitytoolkit.googleapis.com/v1/account
 export const URL_AUTH_SINGIN = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBiNy4n3vAikf2oDkSq7xniqMyngdnIlb8'
 
 export const URL_CHANGE_PASS = 'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyBiNy4n3vAikf2oDkSq7xniqMyngdnIlb8'
+
+export const URL_SIGNOUT = 'https://identitytoolkit.googleapis.com/v1/accounts:revokeRefreshTokens?key=AIzaSyBiNy4n3vAikf2oDkSq7xniqMyngdnIlb8'
 export default dataBase
