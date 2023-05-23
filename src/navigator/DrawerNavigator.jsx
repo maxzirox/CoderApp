@@ -25,7 +25,11 @@ import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator = () => {
-  
+  const userId = useSelector(state=> state.auth.userId)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(getInfo(userId))
+  }, [])
 
   return (
 
@@ -48,32 +52,25 @@ export const DrawerNavigator = () => {
 }
 
 const InternalMenu = ({ navigation }) => {
-  useEffect(()=>{
-    dispatch(getInfo(userId))
-    console.log('userData desde drawer: ', userData.imagen)
-  }, [])
   const dispatch = useDispatch()
   const userId = useSelector(state=> state.auth.userId)
   const userData = useSelector(state => state.user.data)
   const isAdmin = userData.map(item => item.isAdmin)
   const buttons = ['Home', 'Productos', 'Admin', 'Perfil']
   const imagen = userData.map(item => item.imagen)
+  //console.log('userData desde drawer: ', userData[0].imagen)
 
 
   return(
     <DrawerContentScrollView style={styles.globalMargin}>
+      
       <View style={styles.avatarContainer }>
-        {userData === '' ?
-          <ActivityIndicator animating={true} color={MD2Colors.red800} />
-          :
           <Image 
           source={{
             uri: `${imagen}`
           }}
           style={ styles.avatar }
         />
-        }
-
       </View>
 
       <View style={ styles.drawerMenu}>

@@ -1,6 +1,6 @@
 import { AppBar, Switch } from '@react-native-material/core'
 import React, { useState } from 'react'
-import { View, Text, SafeAreaView, ScrollView, StatusBar } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, StatusBar, Alert } from 'react-native'
 import { styles } from '../themes/appTheme'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../store/actions/product.action'
@@ -41,10 +41,16 @@ export const AddProduct = () => {
         }
       };
     const handleSubmit = () =>{
-        console.log('imagen desde addProduct: ', imagen) 
+        //console.log('imagen desde addProduct: ', imagen) 
         //setFormValue({...formValue})
-         dispatch(addProduct(formValue, imagen))
-         .then(()=> alert(`El producto ${formValue.titulo} fue agregado con exito`))
+        if(!formValue.titulo || !formValue.categoria || !formValue.descripcion
+          || !formValue.stock || !formValue.precio || !imagen){
+            Alert.alert('Error', 'Debes completar todos los campos')
+          }else{
+            dispatch(addProduct(formValue, imagen))
+            .then(()=> alert(`El producto ${formValue.titulo} fue agregado con exito`))
+          }
+
 
       }
 
@@ -57,6 +63,7 @@ export const AddProduct = () => {
             stock: '',
             titulo: ''
           })
+        setImagen('')
     }
   return (
     <>
@@ -72,12 +79,12 @@ export const AddProduct = () => {
         { checked ? 
         <ScrollView style={{flex: 1, paddingBottom: 530}}>
             <View style={{backgroundColor: '#522B5B'}}>
-                <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, titulo: value})} value={formValue.titulo} placeholder="Titulo" style={{ margin: 16 }} />
-                <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, categoria: value})} placeholder="Categoria" style={{ margin: 16 }} />
-                <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, descripcion: value})} placeholder="Descripcion" style={{ margin: 16 }} />
-                <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, stock: value})} placeholder="Stock" style={{ margin: 16 }} />
-                <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, precio: value})} placeholder="Precio" style={{ margin: 16 }} />
-                <TextInput variant="outlined" right={<TextInput.Icon icon="camera" onPress={()=>pickImageCamera()} />} onChangeText={(value) => setFormValue({... formValue, imagen: value})} placeholder="Url Imagen" style={{ margin: 16 }} />
+                <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, titulo: value})} value={formValue.titulo} label="Titulo" style={{ margin: 16 }} />
+                <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, categoria: value})} value={formValue.categoria} label="Categoria" style={{ margin: 16 }} />
+                <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, descripcion: value})} value={formValue.descripcion} label="Descripcion" style={{ margin: 16 }} />
+                <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, stock: value})} value={formValue.stock} label="Stock" style={{ margin: 16 }} />
+                <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, precio: value})} value={formValue.precio} label="Precio" style={{ margin: 16 }} />
+                <TextInput variant="outlined" right={<TextInput.Icon icon="camera" onPress={()=>pickImageCamera()} />} onChangeText={(value) => setFormValue({... formValue, imagen: value})} value={!imagen ? '' : imagen.name} label="Url Imagen" style={{ margin: 16 }} />
                 <Button
                     title= 'Agregar'
                     onPress= {() => handleSubmit()}
