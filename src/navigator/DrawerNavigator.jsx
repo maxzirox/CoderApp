@@ -19,6 +19,7 @@ import { UserScreen } from '../screens/UserScreen';
 import { logOut } from '../store/actions/auth.action';
 import { PasswordChangeScreen } from '../screens/PasswordChangeScreen';
 import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+import { ServicesScreen } from '../screens/ServicesScreen';
 
 
 
@@ -45,7 +46,7 @@ export const DrawerNavigator = () => {
         <Drawer.Screen name="Informacion" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={UserInfoScreen} />
         <Drawer.Screen name="Ordenes" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={OrdersScreen} />
         <Drawer.Screen name="Contraseña" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={PasswordChangeScreen} />
-        <Drawer.Screen name="LogIn" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={AuthScreen} />
+        <Drawer.Screen name="Services" options={{ headerStyle: {backgroundColor: '#2B124C'}, headerTitleStyle: {color: 'aliceblue'} }}  component={ServicesScreen} />
         {/*<Drawer.Screen name="Productos" component={BottomNavigator}/>*/}
     </Drawer.Navigator>
   );

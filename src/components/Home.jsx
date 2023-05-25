@@ -13,7 +13,9 @@ export const Home = ({ navigation, products}) => {
         <Pressable onPress={ () => { navigation.navigate('Productos')}} style={ [styles.pressableHome, {backgroundColor: '#522b5b'}] }>
             <Text style={ styles.pressableText }>Productos</Text>
         </Pressable>
-        <Pressable style={[styles.pressableHome, {backgroundColor: '#854f6c'} ]} />
+        <Pressable style={[styles.pressableHome, {backgroundColor: '#854f6c'} ]} onPress={ ()=> {navigation.navigate('Services')}} >
+            <Text>Servicios</Text>
+        </Pressable>
         <Pressable style={[ styles.pressableHome, {backgroundColor: '#dfb6b2'} ]} />
         <Pressable style={[ styles.pressableHome, {backgroundColor: '#fbe4d8'} ]} />
       </View>
