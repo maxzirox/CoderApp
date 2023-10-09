@@ -40,6 +40,27 @@ export const AddProduct = () => {
           });
         }
       };
+
+    const pickImageGalery = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [3, 3],
+          quality: 1,
+          base64: false,
+        })
+        if (!result.canceled) {
+          let uriParts = result.assets[0].uri.split('.')
+          let fileType = uriParts[uriParts.length - 1]
+          let date = new Date();
+          setImagen({
+            name: `photo${date}.${fileType}`,
+            type: `image/${fileType}`,
+            uri: result.assets[0].uri
+          });
+        }
+    };
+
     const handleSubmit = () =>{
         //console.log('imagen desde addProduct: ', imagen) 
         //setFormValue({...formValue})
@@ -84,7 +105,7 @@ export const AddProduct = () => {
                 <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, descripcion: value})} value={formValue.descripcion} label="Descripcion" style={{ margin: 16 }} />
                 <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, stock: value})} value={formValue.stock} label="Stock" style={{ margin: 16 }} />
                 <TextInput variant="outlined" onChangeText={(value) => setFormValue({... formValue, precio: value})} value={formValue.precio} label="Precio" style={{ margin: 16 }} />
-                <TextInput variant="outlined" right={<TextInput.Icon icon="camera" onPress={()=>pickImageCamera()} />} onChangeText={(value) => setFormValue({... formValue, imagen: value})} value={!imagen ? '' : imagen.name} label="Url Imagen" style={{ margin: 16 }} />
+                <TextInput variant="outlined" right={<TextInput.Icon icon="camera" onPress={()=>pickImageGalery()} />} onChangeText={(value) => setFormValue({... formValue, imagen: value})} value={!imagen ? '' : imagen.name} label="Url Imagen" style={{ margin: 16 }} />
                 <Button
                     title= 'Agregar'
                     onPress= {() => handleSubmit()}

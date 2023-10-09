@@ -24,9 +24,27 @@ export const Orders = () => {
         <View style={styles.cartOrders}>
           <View>
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
-                <Text style={{textAlign: 'center', fontSize: 15, color: 'aliceblue'}}>Orden:</Text>
+                <Text style={{textAlign: 'center', fontSize: 15, color: 'aliceblue'}}>
+                  Orden:
+                </Text>
                 <Text style={{textAlign: 'center', fontSize: 15, color: 'aliceblue'}}>
                 {item.id}
+                </Text>
+            </View>
+            <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
+                <Text style={{textAlign: 'center', fontSize: 15, color: 'aliceblue'}}>
+                  Cliente:
+                </Text>
+                <Text style={{textAlign: 'center', fontSize: 15, color: 'aliceblue'}}>
+                {item.User.name}
+                </Text>
+            </View>
+            <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
+                <Text style={{textAlign: 'center', fontSize: 15, color: 'aliceblue'}}>
+                 Direccion:
+                </Text>
+                <Text style={{textAlign: 'center', fontSize: 15, color: 'aliceblue'}}>
+                {item.User.address[0]}
                 </Text>
             </View>
             <Text style={{textAlign: 'center', fontSize: 13, color: 'aliceblue'}}>
@@ -39,15 +57,28 @@ export const Orders = () => {
             </Text>
                {item.Products.map(product => {
                 return(
-                  <Text key={product.id} style={{textAlign: 'center', alignSelf: 'center', fontSize: 15, marginHorizontal: 10, color: 'aliceblue'}}>
-                    {product.titulo}
-                  </Text>
+                  <View key={product.id} style={{display: 'flex', flexDirection: 'row', }} > 
+                    <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 15, marginHorizontal: 10, color: 'aliceblue'}}>
+                      {product.quantity} x
+                    </Text>
+                    <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 15, marginHorizontal: 10, color: 'aliceblue'}}>
+                      {product.titulo}
+                    </Text>
+                  </View>
                 )
               })}
           </View>
           <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 15, marginHorizontal: 10, color: 'aliceblue'}}>
-            Total: {item.Total}
+            Total: ${item.Total}
           </Text>
+          {
+            console.log("item desde orden: ", item.User.address[0])
+          }
+          <View>
+            <Button mode='outlined' onPress={()=>setCheck(true)}>
+                <Text>Confirmar</Text>
+            </Button>
+          </View>
         </View>
       )
     }
