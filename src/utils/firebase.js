@@ -16,7 +16,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 //Firestore inicializacion
-
 const dataBase = getFirestore(app)
 
 export const URL_AUTH_SINGUP ='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBiNy4n3vAikf2oDkSq7xniqMyngdnIlb8'

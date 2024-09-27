@@ -19,6 +19,7 @@ export const getProduct = () => {
             const productList = productSnapshot.docs.map((item) => {
                 let product = item.data()
                 product.id = item.id
+                console.log(product)
                 return product
             }); 
             dispatch({

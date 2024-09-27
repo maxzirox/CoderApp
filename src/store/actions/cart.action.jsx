@@ -29,8 +29,7 @@ export const confirmCart = (payload, total, userInfo, date) => {
                 }, 
                 Products: payload, 
                 date: date,
-                Total: total,
-                Estado: "en espera"
+                Total: total
             })
 
         dispatch({

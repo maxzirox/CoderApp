@@ -1,54 +1,46 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react';
 import { Button } from "@react-native-material/core";
-import { Dimensions,View, Text, Image } from 'react-native'
-import { styles } from '../themes/appTheme'
+import { Dimensions, View, Text, Image } from 'react-native';
+import { styles } from '../themes/appTheme';
 import Carousel from 'react-native-reanimated-carousel';
-//import { useProducts } from '../hooks/useProducts';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterProduct, getProduct, selectProduct } from '../store/actions/product.action';
-import { useProducts } from '../hooks/useProducts';
 
-
-export const CardList = ({ navigation}) => {
-
+export const CardList = ({ navigation }) => {
     const width = Dimensions.get('window').width;   
     const dispatch = useDispatch();
-    const productos = useSelector(state => state.products.products)
-    //console.log('data desde cardlist: ', products)
-    useEffect(()=>{
-        dispatch(getProduct()) 
-        dispatch(filterProduct(productos.id))
-    },[])
+    const productos = useSelector(state => state.products.products);
 
-    const onHandleSelectedProduct = (item) =>{
+    useEffect(() => {
+        dispatch(getProduct());
+    }, [dispatch]);
+
+    const onHandleSelectedProduct = (item) => {
         dispatch(selectProduct(item));
-        navigation.navigate('Detalle', {name:  item.titulo})
-    }
-  return (
-    <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-        <Carousel
-            loop
-            width={width}
-            height={width*2}
-            data={productos}
-            renderItem={({item, index}) => (
-                <View style={{ margin: 50}}>
-                    <View key={index} >
+        navigation.navigate('Detalle', { name: item.titulo });
+    };
+
+    return (
+        <View style={{ alignSelf: 'center', justifyContent: 'center' }}>
+            <Carousel
+                loop
+                width={width}
+                height={width * 2}
+                data={productos}
+                renderItem={({ item, index }) => (
+                    <View key={index} style={{ margin: 50 }}>
                         <Image 
-                            source={{uri: !item.imagen == ' ' ? item.imagen : undefined }}
-                            style={{width: 280, height: 280}} 
+                            source={{ uri: item.imagen && item.imagen.trim() ? item.imagen : undefined }} 
+                            style={{ width: 280, height: 280 }} 
                         />       
-                        <Text style={ styles.globalText}>{item.titulo}</Text>
+                        <Text style={styles.globalText}>{item.titulo}</Text>
                         <Button  
-                            title= 'Detalles'
-                            onPress={ ()=>onHandleSelectedProduct(item) }
+                            title='Detalles'
+                            onPress={() => onHandleSelectedProduct(item)}
                         /> 
                     </View>
-                </View>
-            )}
-            
-        />
-    </View>
-
-  )
-}
+                )}
+            />
+        </View>
+    );
+};
